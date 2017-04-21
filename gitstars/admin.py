@@ -59,7 +59,7 @@ class ProjectsAdmin(admin.ModelAdmin):
     @atomic
     def update(self, request, queryset):
 
-        my_stars = self.my_github_handle.get_user('timkofu').get_starred()
+        my_stars = self.my_github_handle.get_user(settings.GH_USERNAME).get_starred()
         saved_stars = Project.objects.all()
 
         # Adding new stars
