@@ -13,6 +13,9 @@ Note: It wont save a project unless the following fields are populated:
 * html_url
 * stargazers_count
 
-Ensure GH_USERNAME and GH_PASSWORD are set in settings.py
+## Installation
+`pip install gitstars`
+
+Set `GH_USERNAME` and `GH_PASSWORD` in settings.py
 
 Enjoy ✨
