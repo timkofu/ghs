@@ -15,7 +15,10 @@ Note: It wont save a project unless the following fields are populated:
 
 ## Installation
 `pip install gitstars`
-
-Set `GH_USERNAME` and `GH_PASSWORD` in settings.py
+Then in settings.py:
+* Add `gitstars` to `INSTALLED_APPS`
+* Set `GH_USERNAME` and `GH_PASSWORD` (github username and password)
+* Run `python manage.py migrate`
+* Run `python manage.py initialize_stars`
 
 Enjoy ✨
