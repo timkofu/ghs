@@ -1,7 +1,11 @@
 
 from django.conf import settings
+from django.db import IntegrityError
 from django.db.transaction import atomic
 from django.core.management.base import BaseCommand, CommandError
+
+from github import Github
+
 from gitstars.models import Language, Project
 
 
@@ -13,7 +17,7 @@ class Command(BaseCommand):
     def handle(self, *args, **options):
 
         my_github_handle = Github(settings.GH_USERNAME, settings.GH_PASSWORD)
-        my_stars = self.my_github_handle.get_user(settings.GH_USERNAME).get_starred()
+        my_stars = my_github_handle.get_user(settings.GH_USERNAME).get_starred()
         saved_stars = Project.objects.all()
 
         # Adding new stars
