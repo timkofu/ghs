@@ -1,2 +1,4 @@
-django==1.10.6
-PyGithub==1.32
+Django==1.11.2
+PyGithub==1.34
+PyJWT==1.5.2
+pytz==2017.2
