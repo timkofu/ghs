@@ -33,7 +33,7 @@ class Ops:
 		stored_stars = {x.full_name for x in self.savedstars}
 		fallen_stars = stored_stars.difference(current_stars)
 		for fs in fallen_stars:
-		    saved_stars.get(full_name=fs).delete()
+		    self.savedstars.get(full_name=fs).delete()
 
 
 	def update_metadata(self, expected_exceptions):
