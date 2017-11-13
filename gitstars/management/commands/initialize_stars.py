@@ -6,9 +6,9 @@ from django.core.management.base import BaseCommand, CommandError
 
 from github import Github
 
-from gitstars.gitstars.models import Language, Project
+from gitstars.models import Language, Project
 
-from gitstars.gitstars.operations import Ops
+from gitstars.operations import Ops
 
 
 
