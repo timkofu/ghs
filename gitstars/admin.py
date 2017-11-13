@@ -1,6 +1,7 @@
 
 from django.contrib import admin
-from django.db.transaction import atomic
+from django.contrib.admin import site
+#from django.db.transaction import atomic
 from django.db import IntegrityError
 from django.db.models.base import ObjectDoesNotExist
 from django.conf import settings
@@ -9,7 +10,12 @@ from github import Github
 
 from .models import Project, Language
 
+from .operations import Ops
 
+
+
+# Disable delete action sitewide
+site.disable_action('delete_selected')
 
 @admin.register(Language)
 class LanguageAdmin(admin.ModelAdmin):
@@ -54,65 +60,56 @@ class ProjectsAdmin(admin.ModelAdmin):
     #current_stars.short_description = 'Stars'
 
     # Admin Actions
-    actions = ('update',)
+    actions = ('add', 'update', 'delete')
 
-    @atomic
+    #@atomic
+    def add(self, request, queryset):
+
+        my_stars = self.my_github_handle.get_user(settings.GH_USERNAME).get_starred()
+        saved_stars = Project.objects.all()
+        ops = Ops(my_stars, saved_stars)
+
+        # Add
+        ops.add_stars({'language':Language, 'project':Project}, expected_exceptions=IntegrityError)
+        
+        self.message_user(request, "Added")
+    add.short_description = 'Add'
+
+
     def update(self, request, queryset):
 
         my_stars = self.my_github_handle.get_user(settings.GH_USERNAME).get_starred()
         saved_stars = Project.objects.all()
+        ops = Ops(my_stars, saved_stars)
 
-        # Adding new stars
-        for star in my_stars:
-            if all([star.name, star.full_name, star.language, star.description,
-                star.html_url, star.stargazers_count]):
-                try:
-                    lang = Language.objects.get_or_create(name=star.language)[0]
-                    Project.objects.get_or_create( #update_or_create exists as well :)
-                    # should be faster than get_or_create
-                    #Project( <-- this breaks the atomic transaction????
-                        name=star.name,
-                        full_name=star.full_name,
-                        description=star.description,
-                        url=star.html_url,
-                        initial_stars=star.stargazers_count,
-                        current_stars=star.stargazers_count,
-                        language=lang,
-                    )
-                except IntegrityError:
-                    pass
+        # Update
+        ops.update_metadata(expected_exceptions=ObjectDoesNotExist)
+        
+        self.message_user(request, "Updated")
+    update.short_description = 'Update'
 
-        # Remove de-starred
-        current_stars = {x.full_name for x in my_stars}
-        stored_stars = {x.full_name for x in saved_stars}
-        fallen_stars = stored_stars.difference(current_stars)
-        for fs in fallen_stars:
-            saved_stars.get(full_name=fs).delete()
 
-        # Update current star count, and description
-        for star in my_stars:
-            try:
-                saved_star = saved_stars.get(full_name=star.full_name)
-                if saved_star:
-                    if saved_star.current_stars != star.stargazers_count:
-                        saved_star.current_stars = star.stargazers_count
-                    elif saved_star.description != star.description:
-                        saved_star.description = star.description
-                    saved_star.save()
-            except ObjectDoesNotExist:
-                continue
-        #except Exception:
-        #    pass
-        self.message_user(request, "Refreshed")
-    update.short_description = 'Refresh Stars'
+    def delete(self, request, queryset):
+
+        my_stars = self.my_github_handle.get_user(settings.GH_USERNAME).get_starred()
+        saved_stars = Project.objects.all()
+        ops = Ops(my_stars, saved_stars)
+
+        # Delete
+        ops.fallen()
+        
+        self.message_user(request, "Deleted")
+    delete.short_description = 'Delete'
+
 
     # Hack, so I dont have to selct records; selects all
     def changelist_view(self, request, extra_context=None):
         if 'action' in request.POST and \
-        request.POST['action'] == 'update':
+        request.POST['action'] in ['add','update','delete']:
             post = request.POST.copy()
             post.update(
                 {admin.ACTION_CHECKBOX_NAME: None} # Yep, no selections
             )
             request._set_post(post)
         return super().changelist_view(request, extra_context)
+
