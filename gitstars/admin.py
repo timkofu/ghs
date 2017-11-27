@@ -73,7 +73,7 @@ class ProjectsAdmin(admin.ModelAdmin):
         ops.add_stars({'language':Language, 'project':Project}, expected_exceptions=IntegrityError)
         
         self.message_user(request, "Fetched")
-    add.short_description = 'Fetch'
+    fetch.short_description = 'Fetch'
 
 
     def update(self, request, queryset):
