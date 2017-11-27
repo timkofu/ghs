@@ -105,7 +105,7 @@ class ProjectsAdmin(admin.ModelAdmin):
     # Hack, so I dont have to selct records; selects all
     def changelist_view(self, request, extra_context=None):
         if 'action' in request.POST and \
-        request.POST['action'] in ['add','update','delete']:
+        request.POST['action'] in ['fetch','update','delete']:
             post = request.POST.copy()
             post.update(
                 {admin.ACTION_CHECKBOX_NAME: None} # Yep, no selections
