@@ -60,10 +60,10 @@ class ProjectsAdmin(admin.ModelAdmin):
     #current_stars.short_description = 'Stars'
 
     # Admin Actions
-    actions = ('add', 'update', 'delete')
+    actions = ('fetch', 'update', 'delete')
 
     #@atomic
-    def add(self, request, queryset):
+    def fetch(self, request, queryset):
 
         my_stars = self.my_github_handle.get_user(settings.GH_USERNAME).get_starred()
         saved_stars = Project.objects.all()
@@ -72,8 +72,8 @@ class ProjectsAdmin(admin.ModelAdmin):
         # Add
         ops.add_stars({'language':Language, 'project':Project}, expected_exceptions=IntegrityError)
         
-        self.message_user(request, "Added")
-    add.short_description = 'Add'
+        self.message_user(request, "Fetched")
+    add.short_description = 'Fetch'
 
 
     def update(self, request, queryset):
