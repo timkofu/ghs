@@ -1,44 +1,44 @@
 
+from .models import Project, Language
+
+
+
 class Ops:
 
 	def __init__(self, mystars, savedstars):
-		self.mystars = mystars
+		self.stars = mystars
 		self.savedstars = savedstars
 
 
-	def add_stars(self, models, expected_exceptions):
+	def add_stars(self):
 		''' Add new stars '''
-		for star in self.mystars:
-			
-			# Must have a name, full name and html url
-			if not all([star.name,star.html_url]):continue
 
-			try:
-				models['project'](
-	                name=star.name,
-	                full_name=star.full_name or 'N/A',
-	                description=star.description or 'N/A',
-	                url=star.html_url,
-	                initial_stars=star.stargazers_count,
-	                current_stars=star.stargazers_count,
-	                language=models['language'].objects.get_or_create(name=star.language or 'N/A')[0]
-	            ).save()
-			except expected_exceptions:
-			    pass
+		addables = {
+			s.name for s in self.stars if all([s.name,s.html_url]) # name and url needed
+		} - {
+			p[0] for p in self.savedstars.values_list('name')
+		} # Set diff, so we only add what we don't already haves
 
+		# Now we cherry pick the new ones, and get rid of the orig addables object
+		addables = [s for s in self.stars if s.name in addables]
 
-	def fallen(self):
-		''' Delete unstared projects '''
-		current_stars = {x.full_name for x in self.mystars}
-		stored_stars = {x.full_name for x in self.savedstars}
-		fallen_stars = stored_stars.difference(current_stars)
-		for fs in fallen_stars:
-		    self.savedstars.get(full_name=fs).delete()
+		# Now we save the new ones
+		Project.objects.bulk_create(
+			[Project(
+                name=s.name,
+                full_name=s.full_name or 'N/A',
+                description=s.description or 'N/A',
+                url=s.html_url,
+                initial_stars=s.stargazers_count,
+                current_stars=s.stargazers_count,
+                language=Language.objects.get_or_create(name=s.language or 'N/A')[0]
+            ) for s in addables]
+        )
 
 
 	def update_metadata(self, expected_exceptions):
 		''' Update starcount and descriptions '''
-		for star in self.mystars:
+		for star in self.stars:
 		    try:
 		        saved_star = self.savedstars.get(full_name=star.full_name)
 		        if saved_star:
@@ -51,3 +51,11 @@ class Ops:
 		            saved_star.save()
 		    except expected_exceptions:
 		        continue
+
+
+	def fallen(self):
+		''' Delete unstared projects (fallen stars) '''
+		current_stars = {x.full_name for x in self.stars}
+		stored_stars = {x.full_name for x in self.savedstars}
+		for fs in stored_stars - current_stars:
+		    self.savedstars.get(full_name=fs).delete()
