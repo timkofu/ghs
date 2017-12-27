@@ -3,6 +3,7 @@ from django.contrib import admin
 from django.contrib.admin import site
 from django.db.models.base import ObjectDoesNotExist
 from django.conf import settings
+from django.utils.html import format_html
 
 from github import Github
 
@@ -41,8 +42,8 @@ class ProjectsAdmin(admin.ModelAdmin):
 
     # List display functions
     def github_link(self, obj):
-        return '<a href="{0}" target="_blank">{1}</a>'.format(obj.url, obj.name)
-    github_link.allow_tags = True
+        return format_html('<a href="{0}" target="_blank">{1}</a>'.format(obj.url, obj.name))
+    #github_link.mark_safe = True
     github_link.short_description = 'GitHub Link'
 
     ordering = ("-current_stars",)

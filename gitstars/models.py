@@ -21,7 +21,7 @@ class Project(models.Model):
     url = models.URLField(unique=True)  # .html_url
     initial_stars = models.IntegerField()  # .stargazers_count
     current_stars = models.IntegerField(default=0)  # .stargazers_count
-    language = models.ForeignKey(Language, related_name="projects")  # .language
+    language = models.ForeignKey(Language, related_name="projects", on_delete=models.CASCADE)  # .language
     add_date = models.DateField(auto_now_add=True)
     notes = models.TextField(null=True, blank=True)
 
