@@ -48,32 +48,26 @@ class ProjectsAdmin(admin.ModelAdmin):
     ordering = ("-current_stars",)
 
     # Admin Actions
-    actions = ('fetch', 'update', 'delete')
-
-    ops = Ops(
-        Github(settings.GH_USERNAME, settings.GH_PASSWORD).get_user(settings.GH_USERNAME).get_starred(), 
-        Project.objects.all()
-    )
-
-    def fetch(self, request, queryset):
-        # Add
-        self.ops.add_stars()
-        self.message_user(request, "Fetched")
-    fetch.short_description = 'Fetch'
-
+    actions = ['update']
 
     def update(self, request, queryset):
-        # Update
-        self.ops.update_metadata(expected_exceptions=ObjectDoesNotExist)
-        self.message_user(request, "Updated")
+
+        ops = Ops(
+            Github(settings.GH_USERNAME, settings.GH_PASSWORD).get_user(settings.GH_USERNAME).get_starred(), 
+            Project.objects.all()
+        )
+        
+        # Add New
+        ops.add_stars()
+
+        # Update existing project's "metadata"
+        ops.update_metadata(expected_exceptions=ObjectDoesNotExist)
+
+        # Delete "fallen stars"
+        ops.fallen()
+
+        self.message_user(request, 'Updated')
     update.short_description = 'Update'
-
-
-    def delete(self, request, queryset):
-        # Delete
-        self.ops.fallen()
-        self.message_user(request, "Deleted")
-    delete.short_description = 'Delete Unstared'
 
 
     # Hack, so I dont have to selct records; selects all
