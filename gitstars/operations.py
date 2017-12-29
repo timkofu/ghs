@@ -1,4 +1,8 @@
 
+from django.conf import settings
+
+from github import Github
+
 from .models import Project, Language
 
 
@@ -59,3 +63,5 @@ class Ops:
 		stored_stars = {x.full_name for x in self.savedstars}
 		for fs in stored_stars - current_stars:
 		    self.savedstars.get(full_name=fs).delete()
+
+github_handle = Github(settings.GH_USERNAME, settings.GH_PASSWORD).get_user(settings.GH_USERNAME)
