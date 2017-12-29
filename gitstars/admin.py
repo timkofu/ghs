@@ -2,13 +2,10 @@
 from django.contrib import admin
 from django.contrib.admin import site
 from django.db.models.base import ObjectDoesNotExist
-from django.conf import settings
 from django.utils.html import format_html
 
-from github import Github
-
 from .models import Project, Language
-from .operations import Ops
+from .operations import Ops, github_handle
 
 
 
@@ -54,7 +51,7 @@ class ProjectsAdmin(admin.ModelAdmin):
     def update(self, request, queryset):
 
         ops = Ops(
-            Github(settings.GH_USERNAME, settings.GH_PASSWORD).get_user(settings.GH_USERNAME).get_starred(), 
+            github_handle.get_starred(), 
             Project.objects.all()
         )
         

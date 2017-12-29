@@ -2,12 +2,9 @@
 import sys
 
 from django.core.management.base import BaseCommand, CommandError
-from django.conf import settings
-
-from github import Github
 
 from gitstars.models import Project
-from gitstars.operations import Ops
+from gitstars.operations import Ops, github_handle
 
 
 
@@ -18,7 +15,7 @@ class Command(BaseCommand):
 
         try:
             ops = Ops(
-                Github(settings.GH_USERNAME, settings.GH_PASSWORD).get_user(settings.GH_USERNAME).get_starred(), 
+                github_handle.get_starred(), 
                 Project.objects.all()
             )
             ops.add_stars()
