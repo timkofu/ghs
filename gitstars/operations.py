@@ -1,5 +1,9 @@
 
+import pickle
+from time import sleep
+
 from django.conf import settings
+from django.core.cache import cache
 
 from github import Github
 
@@ -13,22 +17,18 @@ class Ops:
 		self.stars = mystars
 		self.savedstars = savedstars
 
-
 	def add_stars(self):
 		''' Add new stars '''
 
-		addables = {
-			s.name for s in self.stars if all([s.name,s.html_url]) # name and url needed
+		addables = [s for s in self.stars if s.name in { # star object if (valid) star not already saved
+			s.name for s in self.stars if all([s.name,s.html_url]) # valid stars (name & url set)
 		} - {
-			p[0] for p in self.savedstars.values_list('name')
-		} # Set diff, so we only add what we don't already haves
-
-		# Now we cherry pick the new ones, and get rid of the orig addables object
-		addables = [s for s in self.stars if s.name in addables]
+			p[0] for p in self.savedstars.values_list('name') # already saved stars
+		}] # in valid stars but not in saved stars
 
 		# Now we save the new ones
-		Project.objects.bulk_create(
-			[Project(
+		for s in addables:
+			Project(
                 name=s.name,
                 full_name=s.full_name or 'N/A',
                 description=s.description or 'N/A',
@@ -36,9 +36,8 @@ class Ops:
                 initial_stars=s.stargazers_count,
                 current_stars=s.stargazers_count,
                 language=Language.objects.get_or_create(name=s.language or 'N/A')[0]
-            ) for s in addables]
-        )
-
+            ).save()
+			sleep(0.1) # treat the server nice
 
 	def update_metadata(self, expected_exceptions):
 		''' Update starcount and descriptions '''
@@ -56,7 +55,6 @@ class Ops:
 		    except expected_exceptions:
 		        continue
 
-
 	def fallen(self):
 		''' Delete unstared projects (fallen stars) '''
 		current_stars = {x.full_name for x in self.stars}
@@ -64,4 +62,10 @@ class Ops:
 		for fs in stored_stars - current_stars:
 		    self.savedstars.get(full_name=fs).delete()
 
-github_handle = Github(settings.GH_USERNAME, settings.GH_PASSWORD).get_user(settings.GH_USERNAME)
+def get_ghh():
+	''' get and store the auth handle in the cache for an hour '''
+	ghh = pickle.loads(cache.get('ghh') or pickle.dumps(False))
+	if not ghh:
+		ghh = Github(settings.GH_USERNAME, settings.GH_PASSWORD).get_user(settings.GH_USERNAME)
+		cache.set('ghh', pickle.dumps(ghh), 60*60)
+	return ghh

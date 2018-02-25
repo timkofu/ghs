@@ -5,7 +5,7 @@ from django.db.models.base import ObjectDoesNotExist
 from django.utils.html import format_html
 
 from .models import Project, Language
-from .operations import Ops, github_handle
+from .operations import Ops, get_ghh
 
 
 
@@ -22,7 +22,9 @@ class LanguageAdmin(admin.ModelAdmin):
 class ProjectsAdmin(admin.ModelAdmin):
 
     date_hierarchy = 'add_date'
-    list_select_related = True
+    list_select_related = (
+        'language',
+    )
     readonly_fields = (
         'name', 'full_name','description', 'url', 'initial_stars',
         'current_stars', 'language', 'add_date',
@@ -51,7 +53,7 @@ class ProjectsAdmin(admin.ModelAdmin):
     def update(self, request, queryset):
 
         ops = Ops(
-            github_handle.get_starred(), 
+            get_ghh().get_starred(),
             Project.objects.all()
         )
         
