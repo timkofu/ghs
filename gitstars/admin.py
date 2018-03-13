@@ -59,7 +59,7 @@ class ProjectsAdmin(admin.ModelAdmin):
             expected_exceptions=ObjectDoesNotExist
         )
 
-        self.message_user(request, 'Updating ...')
+        self.message_user(request, 'Updating, check back in a few minutes.')
     update.short_description = 'Update'
 
 

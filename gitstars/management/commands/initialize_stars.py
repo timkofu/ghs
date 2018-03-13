@@ -2,9 +2,11 @@
 import sys
 
 from django.core.management.base import BaseCommand, CommandError
+from django.db.models.base import ObjectDoesNotExist
 
 from gitstars.models import Project
-from gitstars.operations import Ops, github_handle
+from gitstars.tasks import mega_update
+from gitstars.ops import get_ghh
 
 
 
@@ -14,10 +16,11 @@ class Command(BaseCommand):
     def handle(self, *args, **options):
 
         try:
-            ops = Ops(
-                github_handle.get_starred(), 
-                Project.objects.all()
+            mega_update.delay(
+                stars=get_ghh().get_starred(),
+                savedstars=Project.objects.all(),
+                expected_exceptions=ObjectDoesNotExist,
+                first_run=True
             )
-            ops.add_stars()
         except CommandError as e:
             sys.stderr.write(str(e))
