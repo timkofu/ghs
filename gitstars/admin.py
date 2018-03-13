@@ -5,7 +5,8 @@ from django.db.models.base import ObjectDoesNotExist
 from django.utils.html import format_html
 
 from .models import Project, Language
-from .operations import Ops, get_ghh
+from .tasks import mega_update
+from .ops import get_ghh
 
 
 
@@ -52,21 +53,13 @@ class ProjectsAdmin(admin.ModelAdmin):
 
     def update(self, request, queryset):
 
-        ops = Ops(
-            get_ghh().get_starred(),
-            Project.objects.all()
+        mega_update.delay(
+            stars=get_ghh().get_starred(),
+            savedstars=Project.objects.all(),
+            expected_exceptions=ObjectDoesNotExist
         )
-        
-        # Add New
-        ops.add_stars()
 
-        # Update existing project's "metadata"
-        ops.update_metadata(expected_exceptions=ObjectDoesNotExist)
-
-        # Delete "fallen stars"
-        ops.fallen()
-
-        self.message_user(request, 'Updated')
+        self.message_user(request, 'Updating ...')
     update.short_description = 'Update'
 
 
