@@ -11,7 +11,7 @@ search, to make it easier for you to find what you starred.
 
 Django environment:
 
-* Setup Celery
+* Setup Celery \(1.3.0+\)
 * In settings.py:
   * Add `gitstars` to `INSTALLED_APPS`
   * Set `GH_USERNAME` and `GH_PASSWORD` (github username and password)
