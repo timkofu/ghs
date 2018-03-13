@@ -11,7 +11,7 @@ from .models import Project, Language
 
 @shared_task
 @atomic
-def mega_update(stars, savedstars, expected_exceptions):
+def mega_update(stars, savedstars, expected_exceptions, first_run=False):
 
 	def add_stars():
 		''' Add new stars '''
@@ -59,4 +59,6 @@ def mega_update(stars, savedstars, expected_exceptions):
 		    savedstars.get(full_name=fs).delete()
 
 	# Here we go
-	add_stars();update_metadata();fallen()
+	add_stars()
+	if first_run: return # we are running the initialize_stars admin command, and we're done
+	update_metadata();fallen()
