@@ -6,12 +6,16 @@ search, to make it easier for you to find what you starred.
 ![screen_shot](https://raw.githubusercontent.com/timkofu/timkofu.github.io/master/fls/gs.png)
 
 ## Installation
+
 `pip install gitstars`
 
-Then in settings.py:
-* Add `gitstars` to `INSTALLED_APPS`
-* Set `GH_USERNAME` and `GH_PASSWORD` (github username and password)
-* Run `python manage.py migrate`
-* Run `python manage.py initialize_stars`
+Django environment:
+
+* Setup Celery
+* In settings.py:
+  * Add `gitstars` to `INSTALLED_APPS`
+  * Set `GH_USERNAME` and `GH_PASSWORD` (github username and password)
+  * Run `python manage.py migrate`
+  * Run `python manage.py initialize_stars`
 
 Enjoy ✨
