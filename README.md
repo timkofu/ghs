@@ -11,7 +11,7 @@ search, to make it easier for you to find what you starred.
 
 Django environment:
 
-* Gitstars 1.3.0:
+* For Gitstars 1.3.0+:
   * Setup Celery
 * In settings.py:
   * Add `gitstars` to `INSTALLED_APPS`
