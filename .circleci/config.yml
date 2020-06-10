@@ -16,7 +16,7 @@ jobs:
             sudo pip install pipenv
             pipenv install
             pipenv install --dev
-            tox
+            pipenv run tox
           name: Test
 
 workflows:
