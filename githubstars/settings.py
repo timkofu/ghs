@@ -17,9 +17,12 @@ if os.getenv("PRODUCTION"):
     
     DEBUG = False
     ALLOWED_HOSTS = ['ghstars.herokuapp.com']
+    SECURE_SSL_REDIRECT = True
+    SESSION_COOKIE_SECURE = True
+    CSRF_COOKIE_SECURE = True
 
 else:
-    
+
     DEBUG = True
 
 
