@@ -2,16 +2,17 @@ version: 2.1
 
 orbs:
   python: circleci/python@0.2.1
+  heroku: circleci/heroku@0.0.10
 
 jobs:
-  build-and-test:
+  test:
     executor: python/default
     steps:
       - checkout
       # - python/load-cache
       # - python/install-deps
       # - python/save-cache
-      
+
       - run:
           command: | 
             sudo pip install pipenv
@@ -20,7 +21,13 @@ jobs:
             pipenv run tox
           name: Test
 
-workflows:
-  main:
+  heroku_deploy:
     jobs:
-      - build-and-test
+      - heroku/deploy-via-git
+
+workflows:
+  build-and-deploy:
+    jobs:
+      - heroku_deploy
+          requires:
+            - test
