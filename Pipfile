@@ -8,6 +8,9 @@ ipython = "*"
 sox = "*"
 coverage = "*"
 tox = "*"
+mypy = "*"
+pdoc3 = "*"
+django-stubs = "*"
 
 [packages]
 django = "*"
