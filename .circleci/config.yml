@@ -2,6 +2,7 @@ version: 2.1
 
 orbs:
   heroku: circleci/heroku@0.0.10
+  python: circleci/python@0.2.1
 
 workflows:
   heroku_deploy:
@@ -31,5 +32,4 @@ jobs:
             pipenv run tox
           name: Test
 
-# circleci/python@0.2.1
 
