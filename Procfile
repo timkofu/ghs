@@ -1,1 +1,1 @@
-web: uvicorn githubstars.asgi:application
+web: uvicorn githubstars.asgi:application --port $PORT
