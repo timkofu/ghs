@@ -12,7 +12,11 @@ jobs:
       - python/install-deps
       - python/save-cache
       - run:
-          command: tox
+          command: | 
+            sudo pip install pipenv
+            pipenv install
+            pipenv install --dev
+            tox
           name: Test
 
 workflows:
