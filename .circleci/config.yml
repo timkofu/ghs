@@ -2,34 +2,30 @@ version: 2.1
 
 orbs:
   heroku: circleci/heroku@0.0.10
-  python: circleci/python@0.2.1
 
 workflows:
   heroku_deploy:
     jobs:
-      - test
+      - tests
       - heroku/deploy-via-git:
           requires:
-            - test
+            - tests
           filters:
             branches:
               only: sequential-branch-filter
 
 jobs:
-  test:
-    executor: python/default
+  tests:
+    docker:
+      - image: circleci/python:3.8.3
     steps:
       - checkout
-      # - python/load-cache
-      # - python/install-deps
-      # - python/save-cache
-
       - run:
           command: | 
             sudo pip install pipenv
             pipenv install
             pipenv install --dev
             pipenv run tox
-          name: Test
+          name: Tests
 
 
