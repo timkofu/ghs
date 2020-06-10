@@ -28,6 +28,6 @@ jobs:
 workflows:
   build-and-deploy:
     jobs:
-      - heroku_deploy
+      - heroku_deploy:
           requires:
             - test
