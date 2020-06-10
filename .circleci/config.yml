@@ -12,7 +12,7 @@ workflows:
             - tests
           filters:
             branches:
-              only: sequential-branch-filter
+              only: master
 
 jobs:
   tests:
