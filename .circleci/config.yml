@@ -1,8 +1,18 @@
 version: 2.1
 
 orbs:
-  python: circleci/python@0.2.1
   heroku: circleci/heroku@0.0.10
+
+workflows:
+  heroku_deploy:
+    jobs:
+      - test
+      - heroku/deploy-via-git:
+          requires:
+            - test
+          filters:
+            branches:
+              only: sequential-branch-filter
 
 jobs:
   test:
@@ -21,13 +31,5 @@ jobs:
             pipenv run tox
           name: Test
 
-  heroku_deploy:
-    jobs:
-      - heroku/deploy-via-git
+# circleci/python@0.2.1
 
-workflows:
-  build-and-deploy:
-    jobs:
-      - heroku_deploy:
-          requires:
-            - test
