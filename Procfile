@@ -1,0 +1,1 @@
+uvicorn jobhuntr.asgi:application
