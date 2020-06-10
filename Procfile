@@ -1,1 +1,1 @@
-uvicorn jobhuntr.asgi:application
+web: uvicorn jobhuntr.asgi:application
