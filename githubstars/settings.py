@@ -16,7 +16,8 @@ SECRET_KEY = 'qd*e#1f-qf0*cyi@#a=w@cn9pztc#oyj#$tr98nnf-8ql-0drx'
 if os.getenv("PRODUCTION"):
     
     DEBUG = False
-    ALLOWED_HOSTS = ['ghstars.herokuapp.com']
+    SECRET_KEY = os.urandom(128).decode("utf8", "ignore")
+    ALLOWED_HOSTS = [os.getenv("HOST_NAME")]
     SECURE_SSL_REDIRECT = True
     SESSION_COOKIE_SECURE = True
     CSRF_COOKIE_SECURE = True
