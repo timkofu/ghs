@@ -23,7 +23,7 @@ if os.getenv("PRODUCTION"):
     CSRF_COOKIE_SECURE = True
 
     # Heroku Postgres Credentials
-    credentails = os.getenv('DATABSE_URL').split("//")[1].split(":")
+    credentails = os.getenv('DATABASE_URL').split("//")[1].split(":")
     DATABASE = {
         'PORT': credentails[-1].split('/')[0],
         'NAME': credentails[-1].split('/')[1],
