@@ -22,9 +22,22 @@ if os.getenv("PRODUCTION"):
     SESSION_COOKIE_SECURE = True
     CSRF_COOKIE_SECURE = True
 
+    # Heroku Postgres Credentials
+    credentails = os.getenv('DATABSE_URL').split("//")[1].split(":")
+    DATABASE = {
+        'PORT': credentails[-1].split('/')[0],
+        'NAME': credentails[-1].split('/')[1],
+        'USER': credentails[0],
+        'PASSWORD': credentails[1].split('@')[0],
+        'HOST': credentails[1].split('@')[1]
+    }
+
 else:
 
     DEBUG = True
+    DATABASE = {
+        'NAME': 'githubstars',
+    }
 
 
 
@@ -44,6 +57,7 @@ INSTALLED_APPS = [
 ]
 
 MIDDLEWARE = [
+
     'django.middleware.security.SecurityMiddleware',
     'whitenoise.middleware.WhiteNoiseMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
@@ -52,6 +66,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+
 ]
 
 ROOT_URLCONF = 'githubstars.urls'
@@ -76,13 +91,13 @@ WSGI_APPLICATION = 'githubstars.wsgi.application'
 
 
 # Database
-# https://docs.djangoproject.com/en/3.0/ref/settings/#databases
-
+shared_db_settings = {
+    'ENGINE': 'django.db.backends.postgresql',
+    'CONN_MAX_AGE': 180,
+}
+shared_db_settings.update(DATABASE)
 DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
-    }
+    'default': shared_db_settings
 }
 
 
