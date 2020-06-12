@@ -40,4 +40,4 @@ jobs:
     - name: Yallah!
       run: |
         git push heroku master -f
-        heroku run python manage.py migrate
+        heroku -a ${{ secrets.HEROKU_APP_NAME }} run python manage.py migrate
