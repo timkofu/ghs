@@ -21,6 +21,8 @@ uvicorn = "*"
 psycopg2-binary = "*"
 whitenoise = "*"
 brotlipy = "*"
+hiredis = "*"
+celery = {extras = ["redis"], version = "*"}
 
 [requires]
 python_version = "3.8"
