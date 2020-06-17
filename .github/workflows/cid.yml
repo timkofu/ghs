@@ -1,4 +1,4 @@
-name: CI+CD
+name: C(I,D)
 
 on:
   push:
@@ -40,4 +40,3 @@ jobs:
     - name: Yallah!
       run: |
         git push heroku master -f
-        heroku run -a ${{ secrets.HEROKU_APP_NAME }} python manage.py migrate
