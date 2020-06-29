@@ -1,6 +1,7 @@
 
 import os
 import sys
+import typing
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -23,14 +24,17 @@ if os.getenv("PRODUCTION"):
     CSRF_COOKIE_SECURE = True
 
     # Heroku Postgres Credentials
-    credentails = os.getenv('DATABASE_URL').split("//")[1].split(":")
-    DATABASE = {
-        'PORT': credentails[-1].split('/')[0],
-        'NAME': credentails[-1].split('/')[1],
-        'USER': credentails[0],
-        'PASSWORD': credentails[1].split('@')[0],
-        'HOST': credentails[1].split('@')[1]
-    }
+    DATABASE: typing.Dict[str, str] = {}
+    credentails: str = os.getenv('DATABASE_URL','')
+    if credentails:
+        credentials = credentails.split("//")[1].split(":")
+        DATABASE = {
+            'PORT': credentails[-1].split('/')[0],
+            'NAME': credentails[-1].split('/')[1],
+            'USER': credentails[0],
+            'PASSWORD': credentails[1].split('@')[0],
+            'HOST': credentails[1].split('@')[1]
+        }
 
 else:
 
