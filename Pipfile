@@ -5,12 +5,9 @@ verify_ssl = true
 
 [dev-packages]
 ipython = "*"
-sox = "*"
 coverage = "*"
 tox = "*"
 mypy = "*"
-pdoc3 = "*"
-django-stubs = "*"
 
 [packages]
 django = "*"
