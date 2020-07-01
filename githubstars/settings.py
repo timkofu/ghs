@@ -27,13 +27,13 @@ if os.getenv("PRODUCTION"):
     DATABASE: typing.Dict[str, str] = {}
     credentails: str = os.getenv('DATABASE_URL','')
     if credentails:
-        credentials = credentails.split("//")[1].split(":")
+        creds_parts: typing.List[str] = credentails.split("//")[1].split(":")
         DATABASE = {
-            'PORT': credentails[-1].split('/')[0],
-            'NAME': credentails[-1].split('/')[1],
-            'USER': credentails[0],
-            'PASSWORD': credentails[1].split('@')[0],
-            'HOST': credentails[1].split('@')[1]
+            'PORT': creds_parts[-1].split('/')[0],
+            'NAME': creds_parts[-1].split('/')[1],
+            'USER': creds_parts[0],
+            'PASSWORD': creds_parts[1].split('@')[0],
+            'HOST': creds_parts[1].split('@')[1]
         }
 
 else:

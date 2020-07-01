@@ -3,20 +3,9 @@
 A Django app that stores your git stars in a database, where you can filter and
 search, to make it easier for you to find what you starred.
 
-![screen_shot](https://raw.githubusercontent.com/timkofu/timkofu.github.io/master/fls/gs.png)
+<image align="left" src="assets/screen_shot.jpg">
 
-## Installation
+[![Deploy](https://www.herokucdn.com/deploy/button.svg)](https://heroku.com/deploy)
 
-`pip install gitstars`
+[![A Django Joint](https://www.djangoproject.com/m/img/badges/djangojoint107x25.gif)](https://www.djangoproject.com/)
 
-Django environment:
-
-* For Gitstars 1.3.0+:
-  * Setup Celery
-* In settings.py:
-  * Add `gitstars` to `INSTALLED_APPS`
-  * Set `GH_USERNAME` and `GH_PASSWORD` (github username and password)
-  * Run `python manage.py migrate`
-  * Run `python manage.py initialize_stars`
-
-Enjoy ✨
