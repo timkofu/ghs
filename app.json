@@ -2,6 +2,6 @@
     "name": "githubstars",
     "description": "A Django app to help you manage your starred GitHub projects",
     "repository": "https://github.com/timkofu/githubstars",
-    "logo": "https://github.com/timothy-makobu/githubstars/blob/master/assets/stars.png",
+    "logo": "https://raw.githubusercontent.com/timothy-makobu/githubstars/master/assets/stars.png",
     "keywords": ["python", "django", "searche ngine"]
   }
