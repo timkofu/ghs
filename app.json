@@ -1,0 +1,8 @@
+{
+    "name": "githubstars",
+    "description": "A Django app to help you manage your starred GitHub projects",
+    "repository": "https://github.com/timkofu/githubstars",
+    "logo": "",
+    "keywords": ["python", "django", "searche ngine"]
+  }
+  
