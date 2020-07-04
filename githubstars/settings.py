@@ -144,3 +144,7 @@ USE_TZ = True
 STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 STATIC_URL = '/static/'
 STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
+
+# PyGithub
+GITHUB_USERNAME = os.getenv('GITHUB_USERNAME')
+GITHUB_ACCESS_TOKEN = os.getenv('GITHUB_ACCESS_TOKEN')
