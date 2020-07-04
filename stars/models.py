@@ -2,7 +2,7 @@
 from django.db import models
 
 
-class Language(models.Model):
+class ProgrammingLanguage(models.Model):
 
     name = models.CharField(max_length=64)
 
@@ -11,6 +11,7 @@ class Language(models.Model):
 
     class Meta:
         indexes = [models.Index(fields=['name'])]
+        verbose_name_plural = "Programming Languages"
 
 
 class Project(models.Model):
@@ -21,7 +22,9 @@ class Project(models.Model):
     url = models.URLField(unique=True)  # .html_url
     initial_stars = models.IntegerField()  # .stargazers_count
     current_stars = models.IntegerField(default=0)  # .stargazers_count
-    language = models.ForeignKey(Language, related_name="projects", on_delete=models.CASCADE)  # .language
+    language = models.ForeignKey(
+        ProgrammingLanguage, related_name="projects", on_delete=models.CASCADE
+    )  # .language
     add_date = models.DateField(auto_now_add=True)
     notes = models.TextField(null=True, blank=True)
 

@@ -14,10 +14,13 @@ test_requirements = convert_deps_to_pip(pfile['dev-packages'], r=False)
 class CleanCommand(Command):
     """Custom clean command to tidy up the project root."""
     user_options = []
+
     def initialize_options(self):
         pass
+
     def finalize_options(self):
         pass
+
     def run(self):
         subprocess.check_call(
             'rm -vrf ./build ./dist ./*.pyc ./*.tgz ./*.egg-info ./__pycache__',
