@@ -26,8 +26,8 @@ class MegaUpdate:
         addables = [s for s in self.stars if s.name in {  # star object if (valid) star not already saved
             s.name for s in self.stars if all([s.name, s.html_url])  # valid stars (name & url set)
         } - {
-                        p[0] for p in self.saved_stars.values_list('name')  # already saved stars
-                    }]  # in valid stars but not in saved stars
+            p[0] for p in self.saved_stars.values_list('name')  # already saved stars
+        }]  # in valid stars but not in saved stars
 
         # Now we save the new ones
         for s in addables:

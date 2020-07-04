@@ -8,6 +8,8 @@ ipython = "*"
 coverage = "*"
 tox = "*"
 mypy = "*"
+flake8 = "*"
+pipenv = "*"
 
 [packages]
 django = "*"
@@ -18,8 +20,6 @@ uvicorn = "*"
 psycopg2-binary = "*"
 whitenoise = "*"
 brotlipy = "*"
-hiredis = "*"
-celery = {extras = ["redis"], version = "*"}
 
 [requires]
 python_version = "3.8"
