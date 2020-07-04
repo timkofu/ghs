@@ -1,4 +1,4 @@
-import os
+
 import subprocess
 
 from setuptools import setup, find_packages, Command
@@ -31,13 +31,13 @@ class CleanCommand(Command):
 
 
 setup(
-    
+
     name="Githubstars",
     version="2.0",
     author="Timothy Makobu",
     description="Get insight into your stared projects",
     packages=find_packages(),  # This needs __init__.py in each package (folder)
-    
+
     classifiers=[
         "Programming Language :: Python :: 3.8",
         "Operating System :: POSIX",
@@ -46,7 +46,7 @@ setup(
 
     python_requires=">=3.8",
     install_requires=[requirements, test_requirements],
-    
+
     cmdclass={
         'clean': CleanCommand,
     }
