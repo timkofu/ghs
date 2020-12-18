@@ -1,2 +1,13 @@
+*.pyc
 __pycache__
-.vscode
+.DS_Store
+.pytest_cache
+.coverage
+.mypy_cache
+*.egg*
+build
+dist
+.tox
+.ipynb_checkpoints
+.venv
+.dmypy.json

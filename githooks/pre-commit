@@ -1,0 +1,9 @@
+#!/bin/sh
+
+# First: git config core.hooksPath `pwd`/githooks
+
+poetry update
+tox
+dmypy stop
+poetry export --without-hashes -f requirements.txt > requirements.txt
+git add -A
