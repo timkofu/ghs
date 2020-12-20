@@ -1,16 +1,20 @@
 
 import os
+
+import pytest
+if os.getenv('CI', '0') != '0':
+    pytest.skip("No PostgreSQL on GH Actions CI/CD", allow_module_level=True)
+
+
 from functools import partial
 
 import asyncpg
 
 from ghs.model.database.database import Database
 
-import pytest
 pytestmark = pytest.mark.asyncio
 
 
-@pytest.mark.skipif(os.getenv('CI', '0') != '0', reason="No PostgreSQL DB on GH Actions CI/CD")
 class TestDatabase:
 
     # A fresh connection is made for each test, and thats fine for now
