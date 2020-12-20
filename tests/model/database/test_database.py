@@ -2,7 +2,7 @@
 import os
 
 import pytest
-if os.getenv('CI', '0') != '0':
+if os.getenv('GHA'):
     pytest.skip("No PostgreSQL on GH Actions CI/CD", allow_module_level=True)
 
 
