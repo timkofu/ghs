@@ -10,10 +10,7 @@ import pytest
 pytestmark = pytest.mark.asyncio
 
 
-@pytest.mark.skipif(
-    os.getenv('GHA'),  # type: ignore
-    reason="No PostgreSQL DB on GH Actions CI/CD"
-)
+@pytest.mark.skipif(os.getenv('CI', '0') != '0', reason="No PostgreSQL DB on GH Actions CI/CD")
 class TestDatabase:
 
     # A fresh connection is made for each test, and thats fine for now
