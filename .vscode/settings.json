@@ -5,7 +5,8 @@
     "python.linting.flake8Args": ["--ignore=E501", "--verbose"],
     "python.autoComplete.addBrackets": true,
     "files.exclude": {
-        "**/*.egg*": true
+        "**/*.egg*": true,
+	".dmypy.json": true
     },
     "emmet.includeLanguages": {"jinja-html": "html"},
     "emmet.triggerExpansionOnTab": true,

@@ -3,5 +3,5 @@ click==7.1.2; python_version >= "2.7" and python_full_version < "3.0.0" or pytho
 h11==0.11.0
 httptools==0.1.1
 starlette==0.14.1; python_version >= "3.6"
-uvicorn==0.13.1
+uvicorn==0.13.2
 uvloop==0.14.0
