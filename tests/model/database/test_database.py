@@ -11,7 +11,7 @@ pytestmark = pytest.mark.asyncio
 
 
 @pytest.mark.skipif(
-    os.getenv('CI'),  # type: ignore
+    os.getenv('GHA'),  # type: ignore
     reason="No PostgreSQL DB on GH Actions CI/CD"
 )
 class TestDatabase:
