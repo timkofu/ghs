@@ -30,7 +30,7 @@ jobs:
         pip install poetry tox
 
     - name: Run Tests
-      env:
-        GHA: 1
       run: |
         tox
+      env:
+        GHA: "1"
