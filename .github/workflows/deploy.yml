@@ -32,6 +32,10 @@ jobs:
     - name: Show env-vars
       run: |
         env
+    
+    - name: "Run python test script"
+      run: |
+        python test.py
 
     # - name: Run Tests
     #   run: |
