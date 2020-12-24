@@ -1,6 +1,11 @@
 
-import asyncpg
+import os
+
 import pytest
+if os.getenv('CI'):
+    pytest.skip("No PostgreSQL on GH Actions CI/CD", allow_module_level=True)
+
+import asyncpg
 from pytest_mock import module_mocker, MockerFixture
 
 from ghs.controller.stars.fetch import Fetch
