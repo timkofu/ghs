@@ -1,4 +1,6 @@
 
+import os
+
 import asyncpg
 from typing import Tuple
 
@@ -12,7 +14,10 @@ class Database:
 
     # Give db handle in constructor instead of creating it within to help
     # give a mock object when testing
-    def __init__(self, db_handle: asyncpg.connection.Connection) -> None:
+    def __init__(
+        self,
+        db_handle: asyncpg.connection.Connection = asyncpg.connect(os.getenv('DATABASE_URL'))
+    ) -> None:
         self.db_handle = db_handle
 
     async def create(self, query: Tuple[str, ...]) -> asyncpg.Record:
