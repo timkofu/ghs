@@ -3,7 +3,7 @@
 # First: git config core.hooksPath `pwd`/githooks
 
 poetry update
-tox
+make
 dmypy stop
 poetry export --without-hashes -f requirements.txt > requirements.txt
 git add -A
