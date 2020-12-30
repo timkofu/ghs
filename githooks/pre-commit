@@ -1,10 +1,25 @@
-#!/bin/sh
+#!/bin/bash
 
 # First: git config core.hooksPath `pwd`/githooks
 
 poetry update
+EXIT_CODES=( $? )
 make test
+EXIT_CODES+=( $? )
 dmypy stop
+EXIT_CODES+=( $? )
 poetry export --without-hashes -f requirements.txt > requirements.txt
+EXIT_CODES+=( $? )
 poetry export --dev --without-hashes -f requirements.txt > dev_requirements.txt
+EXIT_CODES+=( $? )
 git add -A
+EXIT_CODES+=( $? )
+
+# Check that all commands exited with success (0) exit code
+for e in ${EXIT_CODES[@]}; do
+    echo $e
+    if [ $e -gt 0]
+    then
+        exit 1
+    fi
+done
