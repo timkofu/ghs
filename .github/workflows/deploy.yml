@@ -27,7 +27,7 @@ jobs:
     - name: Install Dependencies
       run: |
         python -m pip install -U pip
-        pip install --use-feature=2020-resolver -r dev_requirements.txt
+        pip install -r dev_requirements.txt
 
     - name: Run Tests
       run: |

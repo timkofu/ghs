@@ -11,6 +11,6 @@ pyjwt==1.7.1; python_version >= "3.6"
 requests==2.25.1; python_version >= "3.6" and python_full_version < "3.0.0" or python_full_version >= "3.5.0" and python_version >= "3.6"
 starlette==0.14.1; python_version >= "3.6"
 urllib3==1.26.2; python_version >= "3.6" and python_full_version < "3.0.0" or python_full_version >= "3.5.0" and python_version < "4" and python_version >= "3.6"
-uvicorn==0.13.2
+uvicorn==0.13.3
 uvloop==0.14.0
 wrapt==1.12.1; python_version >= "3.6" and python_full_version < "3.0.0" or python_full_version >= "3.4.0" and python_version >= "3.6"

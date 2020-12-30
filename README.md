@@ -1,4 +1,4 @@
-# Gitstars
+# GitHub Star
 
 A Django app that stores your git stars in a database, where you can filter and
 search, to make it easier for you to find what you starred.
@@ -11,5 +11,4 @@ search, to make it easier for you to find what you starred.
 
 [![Deploy](https://www.herokucdn.com/deploy/button.svg)](https://heroku.com/deploy)
 
-[![A Django Joint](https://www.djangoproject.com/m/img/badges/djangojoint107x25.gif)](https://www.djangoproject.com/)
-
+[![forthebadge made-with-python](http://ForTheBadge.com/images/badges/made-with-python.svg)](https://www.python.org/)

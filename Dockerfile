@@ -16,7 +16,7 @@ COPY . .
 
 # install dependencies
 RUN pip install -U pip
-RUN pip install --use-feature=2020-resolver -r requirements.txt
+RUN pip install -r requirements.txt
 
 # add and run as non-root user
 RUN useradd -ms /bin/bash ghs
