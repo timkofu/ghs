@@ -16,9 +16,9 @@ git add -A
 EXIT_CODES+=( $? )
 
 # Check that all commands exited with success (0) exit code
-# for e in ${EXIT_CODES[@]}; do
-#     if [[ $e -gt 0 ]]
-#     then
-#         exit 1
-#     fi
-# done
+for e in ${EXIT_CODES[@]}; do
+    if [[ $e -gt 0 ]]
+    then
+        exit 1
+    fi
+done

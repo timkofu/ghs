@@ -12,4 +12,4 @@ class Update:
     async def update(self) -> None:
 
         async for projects in self.fetcher._fetch_stars():
-            passs
+            pass
