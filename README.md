@@ -1,7 +1,6 @@
 # GitHub Star
 
-A Django app that stores your git stars in a database, where you can filter and
-search, to make it easier for you to find what you starred.
+A web-app to help keep track of your GitHub starred repos.
 
 ### Screen Shot
 
