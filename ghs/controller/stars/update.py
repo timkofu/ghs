@@ -12,4 +12,16 @@ class Update:
     async def update(self) -> None:
 
         async for projects in self.fetcher._fetch_stars():
-            pass
+            for project in projects:
+                self.fetcher.dbh.update(
+                    """
+                        UPDATE project SET
+                        current_stars = {},
+                        current_fork_count = {}
+                        WHERE name = {}
+                    """.format(
+                        project.get_stargazers().totalCount,
+                        project.get_forks().totalCount,
+                        project.name.capitalize()
+                    )
+                )

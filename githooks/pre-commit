@@ -15,7 +15,7 @@ EXIT_CODES+=( $? )
 git add -A
 EXIT_CODES+=( $? )
 
-# Check that all commands exited with success (0) exit code
+# Check that all commands exited with success (0), and if not, stop the commit
 for e in ${EXIT_CODES[@]}; do
     if [[ $e -gt 0 ]]
     then

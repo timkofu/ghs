@@ -23,4 +23,4 @@ RUN useradd -ms /bin/bash ghs
 USER ghs
 
 # run uvicorn
-CMD uvicorn ghs.view.web.endpoints:app --workers $WORKERS --host 0.0.0.0 --port $PORT --loop uvloop --http httptools --interface asgi3 --log-level info
+CMD uvicorn ghs.view.web.endpoints:app --workers 4 --host 0.0.0.0 --port $PORT --loop uvloop --http httptools --interface asgi3 --log-level info
