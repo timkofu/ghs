@@ -38,6 +38,6 @@ jobs:
       run: |
         git remote add heroku https://heroku:${{ secrets.HEROKU_API_KEY }}@git.heroku.com/${{ secrets.HEROKU_APP_NAME }}.git
     - name: Deploy
+      # First run (once): $ heroku stack:set container -a app_name
       run: |
-        # First run only once: $ heroku stack:set container -a app_name
         git push heroku HEAD:master
