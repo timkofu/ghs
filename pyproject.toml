@@ -13,6 +13,7 @@ starlette = "^0.14.1"
 asyncpg = "^0.21.0"
 httptools = "^0.1.1"
 PyGithub = "^1.54"
+newrelic = "^5.24.0"
 
 [tool.poetry.dev-dependencies]
 pytest = "^6.2.1"

@@ -23,4 +23,4 @@ RUN useradd -ms /bin/bash ghs
 USER ghs
 
 # run uvicorn
-CMD uvicorn ghs.view.web.endpoints:app --workers 4 --host 0.0.0.0 --port $PORT --loop uvloop --http httptools --interface asgi3 --log-level info
+CMD NEW_RELIC_CONFIG_FILE=newrelic.ini newrelic-admin uvicorn ghs.view.web.endpoints:app --workers 4 --host 0.0.0.0 --port $PORT --loop uvloop --http httptools --interface asgi3 --log-level info

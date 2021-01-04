@@ -32,3 +32,12 @@ jobs:
     - name: Run Tests
       run: |
         pytest
+
+    ### Deploy to Heroku ###
+    - name: Add Heroku remote
+      run: |
+        git remote add heroku https://heroku:${{ secrets.HEROKU_API_KEY }}@git.heroku.com/${{ secrets.HEROKU_APP_NAME }}.git
+    - name: Deploy
+      run: |
+        heroku stack:set container -a ${{ secrets.HEROKU_APP_NAME }}
+        git push heroku HEAD:master
