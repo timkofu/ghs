@@ -1,3 +1,5 @@
 build:
   docker:
     web: Dockerfile
+run:
+  web: newrelic-admin uvicorn ghs.view.web.endpoints:app --workers 4 --host 0.0.0.0 --port $PORT --loop uvloop --http httptools --interface asgi3 --log-level info
