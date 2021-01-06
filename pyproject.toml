@@ -1,0 +1,30 @@
+[tool.poetry]
+name = "ghs"
+version = "0.1.0"
+description = "My GitHub Stars"
+authors = ["Timothy Makobu <timothy@makobu.io>"]
+license = "AGPLv3"
+
+[tool.poetry.dependencies]
+python = "^3.9"
+uvloop = "^0.14.0"
+uvicorn = "^0.13.1"
+starlette = "^0.14.1"
+asyncpg = "^0.21.0"
+httptools = "^0.1.1"
+PyGithub = "^1.54"
+newrelic = "^5.24.0"
+
+[tool.poetry.dev-dependencies]
+pytest = "^6.2.1"
+mypy = "^0.790"
+pyflakes = "^2.2.0"
+pytest-asyncio = "^0.14.0"
+pytest-cov = "^2.10.1"
+pytest-mock = "^3.4.0"
+flake8 = "^3.8.4"
+nest-asyncio = "^1.4.3"
+
+[build-system]
+requires = ["poetry-core>=1.0.0"]
+build-backend = "poetry.core.masonry.api"

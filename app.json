@@ -1,0 +1,7 @@
+{
+    "name": "GitHub Star",
+    "description": "A web-app to help keep track of your GitHub starred repos.",
+    "repository": "https://github.com/timkofu/ghs",
+    "logo": "https://raw.githubusercontent.com/timothy-makobu/githubstars/2.0/assets/stars.png",
+    "keywords": ["python", "github", "search engine"]
+  }
