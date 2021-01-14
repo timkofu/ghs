@@ -6,6 +6,8 @@ deprecated==1.2.10; python_version >= "3.6" and python_full_version < "3.0.0" or
 h11==0.12.0; python_version >= "3.6"
 httptools==0.1.1
 idna==2.10; python_version >= "3.6" and python_full_version < "3.0.0" or python_full_version >= "3.5.0" and python_version >= "3.6"
+jinja2==2.11.2; (python_version >= "2.7" and python_full_version < "3.0.0") or (python_full_version >= "3.5.0")
+markupsafe==1.1.1; python_version >= "2.7" and python_full_version < "3.0.0" or python_full_version >= "3.5.0"
 newrelic==5.24.0.153; (python_version >= "2.7" and python_full_version < "3.0.0") or (python_full_version >= "3.5.0")
 pygithub==1.54.1; python_version >= "3.6"
 pyjwt==1.7.1; python_version >= "3.6"
