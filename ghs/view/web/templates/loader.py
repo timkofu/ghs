@@ -1,8 +1,9 @@
 
-import os
+from pathlib import Path
 
 from starlette.templating import Jinja2Templates
 
 
-path = os.path.dirname(os.path.realpath(__file__))
-templates_handle = Jinja2Templates(directory=path)
+templates_handle = Jinja2Templates(
+    directory=Path(__file__).resolve().parent.as_posix()
+)
