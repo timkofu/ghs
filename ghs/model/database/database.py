@@ -1,8 +1,10 @@
 
 import os
+import asyncio
+from types import CoroutineType
 
 import asyncpg
-from typing import Tuple
+from typing import Any, Tuple
 
 
 class Database:
@@ -12,13 +14,22 @@ class Database:
         "db_handle",
     )
 
+    @staticmethod
+    def run_and_get(coro: CoroutineType) -> Any:
+        task: Any = asyncio.create_task(coro) # type: ignore
+        asyncio.get_running_loop().run_until_complete(task)
+        return task.result()
+
     # Give db handle in constructor instead of creating it within to help
     # give a mock object when testing
     def __init__(
         self,
         db_handle: asyncpg.connection.Connection = asyncpg.connect(os.getenv('DATABASE_URL'))
     ) -> None:
-        self.db_handle = db_handle
+        self.db_handle = asyncio.run_coroutine_threadsafe(
+            db_handle,
+            asyncio.get_event_loop()
+        ).result()
 
     async def create(self, query: Tuple[str, ...]) -> asyncpg.Record:
 
