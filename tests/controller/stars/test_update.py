@@ -1,9 +1,14 @@
 
+import os
+
+import pytest
+if os.getenv('CI'):
+    pytest.skip("No PostgreSQL on GH Actions CI/CD", allow_module_level=True)
+
 from pytest_mock.plugin import MockerFixture
 from ghs.controller.stars.update import Update
 from ghs.controller.stars.fetch import Fetch
 
-import pytest
 from pytest_mock import mocker, MockerFixture
 
 pytestmark = pytest.mark.asyncio
