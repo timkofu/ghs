@@ -7,7 +7,6 @@ license = "AGPLv3"
 
 [tool.poetry.dependencies]
 python = "^3.9"
-uvloop = "^0.14.0"
 uvicorn = "^0.13.1"
 starlette = "^0.14.1"
 asyncpg = "^0.21.0"
@@ -26,6 +25,7 @@ pytest-mock = "^3.4.0"
 flake8 = "^3.8.4"
 nest-asyncio = "^1.4.3"
 bpython = "^0.20.1"
+pytest-timeout = "^1.4.2"
 
 [build-system]
 requires = ["poetry-core>=1.0.0"]
