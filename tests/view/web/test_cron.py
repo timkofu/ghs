@@ -1,13 +1,14 @@
 
 import os
+import pytest
+if os.getenv('CI'):
+    pytest.skip("No PostgreSQL on GH Actions CI/CD", allow_module_level=True)
 
 from starlette.testclient import TestClient
 
 from ghs.view.web.endpoints import app
 
-import pytest
 import nest_asyncio
-from pytest_mock import module_mocker, MockerFixture
 
 nest_asyncio.apply()
 pytestmark = pytest.mark.asyncio
