@@ -251,7 +251,7 @@ python-versions = "*"
 name = "nest-asyncio"
 version = "1.4.3"
 description = "Patch asyncio to allow nested event loops"
-category = "dev"
+category = "main"
 optional = false
 python-versions = ">=3.5"
 
@@ -540,7 +540,7 @@ python-versions = "*"
 [metadata]
 lock-version = "1.1"
 python-versions = "^3.9"
-content-hash = "07c2babbb592c8c16a31928c9cecee63a25d79104e34ac733e1c41c0dd4e8c08"
+content-hash = "3e8c43b200078ac0121a36cd6127c0c1efe1de0282d2291b83573ab3d00f3e1d"
 
 [metadata.files]
 asyncpg = [
