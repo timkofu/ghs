@@ -39,38 +39,35 @@ class Fetch:
 
     async def stars(self) -> None:
 
-        insert_values: List[str] = []
+        await self.dbh.init_db()
 
         async for projects in self._fetch_stars():
 
             for project in projects:
 
-                insert_values.append(
-                    "({0}, {1}, {2}, {3}, {4}, {5}, {6})".format(
-                        project.name.capitalize(),
-                        project.description,
-                        project.html_url,
-                        project.get_stargazers().totalCount,
-                        project.get_stargazers().totalCount,
-                        project.get_forks().totalCount,
-                        project.get_forks().totalCount,
-                    )
+                project_details = "({0}, {1}, {2}, {3}, {4}, {5}, {6})".format(
+                    project.name.capitalize(),
+                    project.description,
+                    project.html_url,
+                    project.get_stargazers().totalCount,
+                    project.get_stargazers().totalCount,
+                    project.get_forks().totalCount,
+                    project.get_forks().totalCount,
                 )
+
+                await self.dbh.create((
+                    """
+                    INSERT INTO project(
+                        name, description, url, initial_stars,
+                        current_stars, fork_count, initial_fork_count,
+                        current_fork_count
+                    ) VALUES {}
+                    """.format(project_details).strip(),
+                ))
+                # will implement batch inserts later
 
                 # create programming language(s) if not exists
                 for language in project.get_languages():
                     await self.dbh.create((
                         "INSERT INTO pro_lang(name) values($1) ON CONFLICT (name) DO NOTHING", language
                     ))
-
-        # save the remaining project details
-        if insert_values:
-            await self.dbh.create((
-                """
-                INSERT INTO project(
-                    name, description, url, initial_stars,
-                    current_stars, fork_count, initial_fork_count,
-                    current_fork_count
-                ) VALUES {}
-                """.format("\n".join(insert_values)),
-            ))
