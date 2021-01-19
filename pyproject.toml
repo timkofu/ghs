@@ -14,7 +14,7 @@ httptools = "^0.1.1"
 PyGithub = "^1.54"
 newrelic = "^5.24.0"
 Jinja2 = "^2.11.2"
-nest-asyncio = "^1.4.3"
+uvloop = "^0.14.0"
 
 [tool.poetry.dev-dependencies]
 pytest = "^6.2.1"
@@ -26,6 +26,7 @@ pytest-mock = "^3.4.0"
 flake8 = "^3.8.4"
 bpython = "^0.20.1"
 pytest-timeout = "^1.4.2"
+nest-asyncio = "^1.4.3"
 
 [build-system]
 requires = ["poetry-core>=1.0.0"]
