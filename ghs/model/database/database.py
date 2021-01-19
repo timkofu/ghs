@@ -1,15 +1,9 @@
 
 import os
-import asyncio
 from functools import partial
-from types import resolve_bases
-from typing import Any, Coroutine
+from typing import Any, Tuple
 
 import asyncpg
-import nest_asyncio
-from typing import Tuple
-
-nest_asyncio.apply()
 
 
 class Database:
