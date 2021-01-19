@@ -11,6 +11,8 @@ class Update:
 
     async def update(self) -> None:
 
+        self.fetcher.dbh.init_db()
+
         async for projects in self.fetcher._fetch_stars():
             for project in projects:
                 self.fetcher.dbh.update(
