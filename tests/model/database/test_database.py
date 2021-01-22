@@ -25,15 +25,15 @@ class TestDatabase:
         ))
         return dbh
 
-    async def test_create(self) -> None:
+    async def test_upsert(self) -> None:
 
         dbh = await self.gen_dbh()
 
-        result = await dbh.create(('INSERT INTO pro_lang(name) VALUES($1)', 'Python'))
-        assert result == "INSERT 0 1"
+        result = await dbh.upsert(('INSERT INTO pro_lang(name) VALUES($1) RETURNING language_id', 'Python'))
+        assert isinstance(result, int)
 
         with pytest.raises(ValueError):
-            await dbh.create(('SELECT * FROM pro_lang',))
+            await dbh.upsert(('SELECT * FROM pro_lang',))
 
     async def test_read(self) -> None:
 
@@ -44,16 +44,6 @@ class TestDatabase:
 
         with pytest.raises(ValueError):
             await dbh.read("INSERT INTO pro_lang(name) VALUES('Javascript')")
-
-    async def test_update(self) -> None:
-
-        dbh = await self.gen_dbh()
-
-        result = await dbh.update("UPDATE pro_lang SET name='Rust' WHERE name='Python'")
-        assert result == 'UPDATE 1'
-
-        with pytest.raises(ValueError):
-            await dbh.update('SELECT name FROM pro_lang')
 
     async def test_delete(self) -> None:
 

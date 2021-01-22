@@ -16,7 +16,7 @@ CREATE TABLE "project" (
   "initial_stars" integer NOT NULL,
   "current_stars" integer NOT NULL,
   "add_time" timestamptz NOT NULL DEFAULT NOW(),
-  "intitial_fork_count" integer NOT NULL,
+  "initial_fork_count" integer NOT NULL,
   "current_fork_count" integer NOT NULL
 );
 
