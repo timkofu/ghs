@@ -1,7 +1,9 @@
-name: ghs
+name: GHS
 
 on:
   push:
+    branches: [ 2.0 ]
+  pull_request:
     branches: [ 2.0 ]
 
 jobs:

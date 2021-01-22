@@ -21,13 +21,13 @@ class Database:
     )) -> None:
         self.db_handle = await conn_coro()
 
-    async def create(self, query: Tuple[str, ...]) -> asyncpg.Record:
+    async def upsert(self, query: Tuple[str, ...]) -> asyncpg.Record:
 
         if not query[0].startswith('INSERT'):
             raise ValueError("Not an INSERT query")
 
         async with self.db_handle.transaction():
-            return await self.db_handle.execute(*query)
+            return await self.db_handle.fetchval(*query)
 
     async def read(self, query: str) -> asyncpg.Record:
 
@@ -36,14 +36,6 @@ class Database:
 
         async with self.db_handle.transaction():
             return await self.db_handle.fetch(query)
-
-    async def update(self, query: str) -> asyncpg.Record:
-
-        if not query.startswith('UPDATE'):
-            raise ValueError("Not an UPDATE query")
-
-        async with self.db_handle.transaction():
-            return await self.db_handle.execute(query)
 
     async def delete(self, query: str) -> asyncpg.Record:
 
