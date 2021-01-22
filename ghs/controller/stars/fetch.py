@@ -2,7 +2,9 @@
 import os
 import math
 import asyncio
-from typing import List, AsyncGenerator
+import logging
+from functools import partial
+from typing import List, AsyncGenerator, Union
 
 import github
 from github import Github
@@ -26,8 +28,12 @@ class Fetch:
 
     async def _fetch_stars(self) -> AsyncGenerator[List[Repository], None]:
 
-        user: github.NamedUser.NamedUser = self.ghh.get_user(str(os.getenv('GH_USERNAME')))
-        stars: github.PaginatedList.PaginatedList[Repository] = user.get_starred()
+        user: github.NamedUser.NamedUser = await asyncio.get_running_loop().run_in_executor(
+            None, self.ghh.get_user, str(os.getenv('GH_USERNAME'))
+        )
+        stars: github.PaginatedList.PaginatedList[Repository] = await asyncio.get_running_loop().run_in_executor(
+            None, user.get_starred
+        )
         pages: int = math.ceil(stars.totalCount / 30)
         asyncio_loop: asyncio.AbstractEventLoop = asyncio.get_event_loop()
 
@@ -45,29 +51,44 @@ class Fetch:
 
             for project in projects:
 
-                project_details = "({0}, {1}, {2}, {3}, {4}, {5}, {6})".format(
+                project_details = (
                     project.name.capitalize(),
-                    project.description,
+                    str(project.description).replace("'", "''"),  # May be None, in which case 'None'
                     project.html_url,
                     project.get_stargazers().totalCount,
-                    project.get_stargazers().totalCount,
-                    project.get_forks().totalCount,
                     project.get_forks().totalCount,
                 )
 
-                await self.dbh.create((
-                    """
+                query: str = """
                     INSERT INTO project(
                         name, description, url, initial_stars,
-                        current_stars, fork_count, initial_fork_count,
+                        current_stars, initial_fork_count,
                         current_fork_count
-                    ) VALUES {}
-                    """.format(project_details).strip(),
-                ))
+                    ) VALUES ({0}) ON CONFLICT (name) DO UPDATE
+                    SET name='{1}', description='{2}', current_stars={3}, current_fork_count={4}
+                    RETURNING project_id
+                """.format(
+                    "'{0}','{1}','{2}',{3},{4},{5},{6}".format(
+                        project_details[0],
+                        project_details[1],
+                        project_details[2],
+                        project_details[3],
+                        project_details[3],
+                        project_details[4],
+                        project_details[4],
+                    ),
+                    project_details[0], project_details[1], project_details[3], project_details[4]
+                ).strip()
+
+                logging.getLogger("uvicorn").info(query)
+
+                await self.dbh.upsert((query,))
                 # will implement batch inserts later
 
                 # create programming language(s) if not exists
                 for language in project.get_languages():
-                    await self.dbh.create((
+                    await self.dbh.upsert((
                         "INSERT INTO pro_lang(name) values($1) ON CONFLICT (name) DO NOTHING", language
                     ))
+
+                # create the many to many relationship
