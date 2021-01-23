@@ -28,4 +28,4 @@ CREATE TABLE "pr_pl" (
 
 -- Indexes
 CREATE INDEX prolang_index on pro_lang(name);
-CREATE INDEX project_index on project(name, current_stars)
+CREATE INDEX project_index on project(name, current_stars);

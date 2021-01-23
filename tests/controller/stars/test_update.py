@@ -9,13 +9,13 @@ if os.getenv('CI'):
 import asyncpg
 from pytest_mock import module_mocker, MockerFixture
 
-from ghs.controller.stars.fetch import Fetch
+from ghs.controller.stars.update import Update
 from ghs.model.database.database import Database
 
 pytestmark = pytest.mark.asyncio
 
 
-class TestFetch:
+class TestUpdate:
 
     async def test_fetch_stars(self, module_mocker: MockerFixture) -> None:
 
@@ -24,6 +24,6 @@ class TestFetch:
         await dbh.init_db(partial(
             asyncpg.connect, user="testdb", password="testdb", database="testdb"
         ))
-        fetch = Fetch(ghh=ghh, dbh=dbh)
+        fetch = Update(ghh=ghh, dbh=dbh)
 
         assert await fetch.stars() is None
