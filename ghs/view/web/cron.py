@@ -14,7 +14,9 @@ class UpdateStars(HTTPEndpoint):  # type: ignore
 
     async def get(self, request: Request) -> PlainTextResponse:
 
-        if request.path_params['cron_auth_token'] == os.getenv('CRON_AUTH_TOKEN'):
+        cron_auth_token: str = request.path_params.get('cron_auth_token')
+
+        if cron_auth_token and (cron_auth_token == os.getenv('CRON_AUTH_TOKEN')):
             await Update().stars()
             return PlainTextResponse("1")
         else:
