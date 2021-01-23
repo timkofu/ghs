@@ -18,12 +18,7 @@ class TestCron:
 
     client: TestClient = TestClient(app)
 
-    async def test_fetch(self) -> None:
-
-        response = self.client.get("/fetch/test")
-        assert response.status_code == 403
-
     async def test_update(self) -> None:
 
         response = self.client.get("/update/test")
-        assert response.status_code == 200
+        assert response.status_code == 403

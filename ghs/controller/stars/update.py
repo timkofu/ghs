@@ -3,17 +3,17 @@ import os
 import math
 import asyncio
 import logging
-from functools import partial
-from typing import List, AsyncGenerator, Union
+from typing import List, AsyncGenerator, Set
 
 import github
 from github import Github
 from github.Repository import Repository
 
+from ghs.controller.commons import DEBUG
 from ghs.model.database.database import Database
 
 
-class Fetch:
+class Update:
     ''' Fetch stars and store them in DB '''
 
     __slots__ = ('ghh', 'dbh')
@@ -34,25 +34,28 @@ class Fetch:
         stars: github.PaginatedList.PaginatedList[Repository] = await asyncio.get_running_loop().run_in_executor(
             None, user.get_starred
         )
-        pages: int = math.ceil(stars.totalCount / 30)
-        asyncio_loop: asyncio.AbstractEventLoop = asyncio.get_event_loop()
+        pages: int = math.ceil(stars.totalCount / 30)  # GitHub pagination count
 
         for page in range(pages):
 
-            yield await asyncio_loop.run_in_executor(None, stars.get_page, page)
+            yield await asyncio.get_event_loop().run_in_executor(None, stars.get_page, page)
 
             await asyncio.sleep(1)  # Give GH server a break
 
     async def stars(self) -> None:
 
         await self.dbh.init_db()
+        active_projects: Set[str] = set()  # For use in removing unstared projects
 
         async for projects in self._fetch_stars():
 
             for project in projects:
 
+                project_name = project.name.capitalize()
+                active_projects.add(project_name)
+
                 project_details = (
-                    project.name.capitalize(),
+                    project_name,
                     str(project.description).replace("'", "''"),  # May be None, in which case 'None'
                     project.html_url,
                     project.get_stargazers().totalCount,
@@ -80,15 +83,24 @@ class Fetch:
                     project_details[0], project_details[1], project_details[3], project_details[4]
                 ).strip()
 
-                logging.getLogger("uvicorn").info(query)
+                if DEBUG:
+                    logging.getLogger("uvicorn").info(query)
 
-                await self.dbh.upsert((query,))
+                project_id: int = await self.dbh.upsert((query,))
                 # will implement batch inserts later
 
                 # create programming language(s) if not exists
                 for language in project.get_languages():
-                    await self.dbh.upsert((
-                        "INSERT INTO pro_lang(name) values($1) ON CONFLICT (name) DO NOTHING", language
+
+                    language_id: int = await self.dbh.upsert((
+                        f"""INSERT INTO pro_lang(name) values('{language}') ON CONFLICT (name) DO UPDATE
+                        SET name = EXCLUDED.name
+                        RETURNING language_id
+                        """.strip(),  # Need to set it (name) so RETURNING can work
                     ))
 
-                # create the many to many relationship
+                    # Create many-to-many relationship
+                    query = f"INSERT INTO pr_pl values({language_id}, {project_id}) ON CONFLICT DO NOTHING"
+                    if DEBUG:
+                        logging.getLogger("uvicorn").info(query)
+                    await self.dbh.upsert((query,))
