@@ -6,6 +6,7 @@ import logging
 from typing import List, AsyncGenerator, Set
 
 import github
+from asyncpg import Record
 from github import Github
 from github.Repository import Repository
 
@@ -45,14 +46,14 @@ class Update:
     async def stars(self) -> None:
 
         await self.dbh.init_db()
-        active_projects: Set[str] = set()  # For use in removing unstared projects
+        current_stars: Set[str] = set()  # For use in removing unstared projects
 
         async for projects in self._fetch_stars():
 
             for project in projects:
 
                 project_name = project.name.capitalize()
-                active_projects.add(project_name)
+                current_stars.add(project_name)
 
                 project_details = (
                     project_name,
@@ -104,3 +105,10 @@ class Update:
                     if DEBUG:
                         logging.getLogger("uvicorn").info(query)
                     await self.dbh.upsert((query,))
+
+        # Now we remove unstarred repos
+        stored_stars: Set[str] = {p['name'] for p in await self.dbh.read("SELECT name FROM project")}
+        fallen_stars: Set[str] = stored_stars - current_stars
+
+        for star in fallen_stars:
+            await self.dbh.delete(f"DELETE FROM project WHERE name = '{star}'")
