@@ -110,15 +110,23 @@ toml = ["toml"]
 
 [[package]]
 name = "curtsies"
-version = "0.3.4"
+version = "0.3.5"
 description = "Curses-like terminal wrapper, with colored strings!"
 category = "dev"
 optional = false
-python-versions = "*"
+python-versions = ">=3.6"
 
 [package.dependencies]
 blessings = ">=1.5"
-wcwidth = ">=0.1.4"
+cwcwidth = "*"
+
+[[package]]
+name = "cwcwidth"
+version = "0.1.1"
+description = "Python bindings for wc(s)width"
+category = "dev"
+optional = false
+python-versions = ">= 3.6"
 
 [[package]]
 name = "deprecated"
@@ -663,8 +671,10 @@ coverage = [
     {file = "coverage-5.3.1.tar.gz", hash = "sha256:38f16b1317b8dd82df67ed5daa5f5e7c959e46579840d77a67a4ceb9cef0a50b"},
 ]
 curtsies = [
-    {file = "curtsies-0.3.4-py2.py3-none-any.whl", hash = "sha256:068db8e5d8a2f23b765d648a66dfa9445cf2412177126ae946a7357ade992640"},
-    {file = "curtsies-0.3.4.tar.gz", hash = "sha256:4ca543998d8bbba7185db099f8b7bb30baeb47426f7ac1a271e4d9ca8bbb2b05"},
+    {file = "curtsies-0.3.5.tar.gz", hash = "sha256:a587ff3335667a32be7afed163f60a1c82c5d9c848d8297534a06fd29de20dbd"},
+]
+cwcwidth = [
+    {file = "cwcwidth-0.1.1.tar.gz", hash = "sha256:042cdf80d80a836935f700d8e1c34270f82a627fc07f7b5ec1e8cec486e1d755"},
 ]
 deprecated = [
     {file = "Deprecated-1.2.11-py2.py3-none-any.whl", hash = "sha256:924b6921f822b64ec54f49be6700a126bab0640cfafca78f22c9d429ed590560"},

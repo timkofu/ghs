@@ -1,7 +1,7 @@
 
 import os
 from functools import partial
-from typing import Any, Tuple
+from typing import Any
 
 import asyncpg
 
@@ -21,7 +21,7 @@ class Database:
     )) -> None:
         self.db_handle = await conn_coro()
 
-    async def upsert(self, query: Tuple[str, ...]) -> asyncpg.Record:
+    async def upsert(self, query: Any) -> asyncpg.Record:
 
         if not query[0].startswith('INSERT'):
             raise ValueError("Not an INSERT query")
