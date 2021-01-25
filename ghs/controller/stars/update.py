@@ -2,6 +2,7 @@
 import os
 import math
 import asyncio
+import logging
 from typing import List, AsyncGenerator, Set, Tuple, Union
 
 import github
@@ -41,6 +42,8 @@ class Update:
             await asyncio.sleep(1)  # Give GH server a break
 
     async def stars(self) -> None:
+
+        logging.getLogger("uvicorn").info("GHS: Starting update ...")
 
         await self.dbh.init_db()
         current_stars: Set[str] = set()  # For use in removing unstared projects
@@ -106,3 +109,5 @@ class Update:
 
         for star in fallen_stars:
             await self.dbh.delete(f"DELETE FROM project WHERE name = '{star}'")
+
+        logging.getLogger("uvicorn").info("GHS: Update completed successfuly ✨")
