@@ -18,7 +18,7 @@ uvloop = "^0.14.0"
 
 [tool.poetry.dev-dependencies]
 pytest = "^6.2.1"
-mypy = "^0.790"
+mypy = "^0.800"
 pyflakes = "^2.2.0"
 pytest-asyncio = "^0.14.0"
 pytest-cov = "^2.10.1"
