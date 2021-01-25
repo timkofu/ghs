@@ -53,6 +53,9 @@ class Update:
 
             for project in projects:
 
+                if not all((project.name, project.language)):
+                    break
+
                 project_name = project.name.capitalize()
                 current_stars.add(project_name)
 
