@@ -54,6 +54,7 @@ class Update:
             for project in projects:
 
                 if not all((project.name, project.language)):
+                    logging.getLogger("uvicorn").warn(f"GHS: Could not save package {project.html_url}")
                     break
 
                 project_name = project.name.capitalize()
