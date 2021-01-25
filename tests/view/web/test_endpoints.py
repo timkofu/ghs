@@ -26,8 +26,13 @@ class TestEndPoints:
 
         response = self.client.get("/")
         assert response.status_code == 200
-    
+
     async def test_heroku_insomnia(self) -> None:
 
         response = self.client.get('/heroku_insomnia')
         assert response.text == "I'm up!"
+
+    async def test_update(self) -> None:
+
+        response = self.client.get("/update/test")
+        assert response.status_code == 403
