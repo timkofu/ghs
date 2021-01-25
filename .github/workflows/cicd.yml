@@ -47,4 +47,4 @@ jobs:
     - name: Deploy
       # First run (once): $ heroku stack:set container -a app_name
       run: |
-        git push heroku HEAD:master
+        git push -f heroku HEAD:master
