@@ -3,7 +3,7 @@ from starlette.routing import Route
 from starlette.applications import Starlette
 
 from .front import Front
-from .cron import UpdateStars
+from .update import UpdateStars
 from .heroku_insomnia import HerokuInsomnia
 
 from ghs.controller.commons import DEBUG
@@ -16,9 +16,8 @@ app = Starlette(
     routes=[
 
         Route("/", Front),
-        Route("/update", UpdateStars),
         Route("/heroku_insomnia", HerokuInsomnia),
-        Route("/update/{cron_auth_token}", UpdateStars),
+        Route("/update/{update_auth_token}", UpdateStars),
 
     ]
 
