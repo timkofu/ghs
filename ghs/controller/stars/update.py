@@ -28,7 +28,7 @@ class Update:
     async def _fetch_stars(self) -> AsyncGenerator[List[Repository], None]:
 
         user: github.NamedUser.NamedUser = await asyncio.get_running_loop().run_in_executor(
-            None, self.ghh.get_user, str(os.getenv('GH_USERNAME'))
+            None, self.ghh.get_user  # get the owner of the auth token
         )
         stars: github.PaginatedList.PaginatedList[Repository] = await asyncio.get_running_loop().run_in_executor(
             None, user.get_starred
@@ -39,7 +39,8 @@ class Update:
 
             yield await asyncio.get_event_loop().run_in_executor(None, stars.get_page, page)
 
-            await asyncio.sleep(1)  # Give GH server a break
+            # await asyncio.sleep(1)  # Give GH server a break
+            # not needed apparently, GH can handle it
 
     async def stars(self) -> None:
 
@@ -86,22 +87,20 @@ class Update:
                 )
 
                 project_id: int = await self.dbh.upsert((query, *args))
-                # will implement batch inserts later
+                # Will implement batch inserts later
 
-                # create programming language(s) if not exists
-                for language in project.get_languages():
+                # Save a project's main programming language
+                language_id: int = await self.dbh.upsert((
+                    """INSERT INTO pro_lang(name) values($1) ON CONFLICT (name) DO UPDATE
+                    SET name = EXCLUDED.name
+                    RETURNING language_id""", project.language  # Need to set it (name) so RETURNING can work
+                ))
 
-                    language_id: int = await self.dbh.upsert((
-                        """INSERT INTO pro_lang(name) values($1) ON CONFLICT (name) DO UPDATE
-                        SET name = EXCLUDED.name
-                        RETURNING language_id""", language  # Need to set it (name) so RETURNING can work
-                    ))
-
-                    # Create many-to-many relationship
-                    await self.dbh.upsert((
-                        "INSERT INTO pr_pl values($1, $2) ON CONFLICT DO NOTHING",
-                        *(language_id, project_id)
-                    ))
+                # Create many-to-many relationship
+                await self.dbh.upsert((
+                    "INSERT INTO pr_pl values($1, $2) ON CONFLICT DO NOTHING",
+                    *(language_id, project_id)
+                ))
 
         # Now we remove unstarred repos
         stored_stars: Set[str] = {p['name'] for p in await self.dbh.read("SELECT name FROM project")}
