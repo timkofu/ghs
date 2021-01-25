@@ -53,9 +53,9 @@ class Update:
 
             for project in projects:
 
-                if not all((project.name, project.language)):
-                    logging.getLogger("uvicorn").warn(f"GHS: Could not save package {project.html_url}")
-                    break
+                # if not all((project.name, project.language)):
+                #     logging.getLogger("uvicorn").warn(f"GHS: Could not save package {project.html_url}")
+                #     break
 
                 project_name = project.name.capitalize()
                 current_stars.add(project_name)
@@ -97,7 +97,7 @@ class Update:
                 language_id: int = await self.dbh.upsert((
                     """INSERT INTO pro_lang(name) values($1) ON CONFLICT (name) DO UPDATE
                     SET name = EXCLUDED.name
-                    RETURNING language_id""", project.language  # Need to set it (name) so RETURNING can work
+                    RETURNING language_id""", project.language or "Undetected"  # Need to set it (name) so RETURNING can work
                 ))
 
                 # Create many-to-many relationship
