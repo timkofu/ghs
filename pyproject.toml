@@ -27,7 +27,7 @@ pytest-mock = "^3.4.0"
 flake8 = "^3.8.4"
 bpython = "^0.20.1"
 pytest-timeout = "^1.4.2"
-nest-asyncio = "^1.4.3"
+nest-asyncio = "^1.5.1"
 ipython = "^7.19.0"
 jedi = "<0.18.0"
 
