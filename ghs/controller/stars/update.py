@@ -73,7 +73,7 @@ class Update:
                         current_stars, initial_fork_count,
                         current_fork_count
                     ) VALUES ($1, $2, $3, $4, $5, $6, $7) ON CONFLICT (name) DO UPDATE
-                    SET name=$8, description=$9, current_stars=$10, current_fork_count=$11
+                    SET description=$8, current_stars=$9, current_fork_count=$10
                     RETURNING project_id"""
 
                 args: Tuple[Union[int, str], ...] = (
@@ -84,7 +84,6 @@ class Update:
                     project_details[3],
                     project_details[4],
                     project_details[4],
-                    project_details[0],
                     project_details[1],
                     project_details[3],
                     project_details[4]
@@ -111,6 +110,6 @@ class Update:
         fallen_stars: Set[str] = stored_stars - current_stars
 
         for star in fallen_stars:
-            await self.dbh.delete(f"DELETE FROM project WHERE name = '{star}'")
+            await self.dbh.delete(("DELETE FROM project WHERE name = $1", star))
 
         logging.getLogger("uvicorn").info("GHS: Update completed successfuly ✨")

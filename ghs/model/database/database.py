@@ -37,10 +37,10 @@ class Database:
         async with self.db_handle.transaction():
             return await self.db_handle.fetch(query)
 
-    async def delete(self, query: str) -> asyncpg.Record:
+    async def delete(self, query: Any) -> asyncpg.Record:
 
-        if not query.startswith('DELETE'):
+        if not query[0].startswith('DELETE'):
             raise ValueError("Not a DELETE query")
 
         async with self.db_handle.transaction():
-            return await self.db_handle.execute(query)
+            return await self.db_handle.execute(*query)

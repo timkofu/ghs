@@ -3,19 +3,14 @@ asyncpg==0.21.0; python_full_version >= "3.5.0"
 atomicwrites==1.4.0; python_version >= "3.6" and python_full_version < "3.0.0" and sys_platform == "win32" or sys_platform == "win32" and python_version >= "3.6" and python_full_version >= "3.4.0"
 attrs==20.3.0; python_version >= "3.6" and python_full_version < "3.0.0" or python_full_version >= "3.4.0" and python_version >= "3.6"
 backcall==0.2.0; python_version >= "3.7"
-blessings==1.7; python_version >= "3.6" and python_full_version < "3.0.0" or python_full_version >= "3.4.0" and python_version >= "3.6"
-bpython==0.20.1
 certifi==2020.12.5; python_version >= "3.6" and python_full_version < "3.0.0" or python_full_version >= "3.5.0" and python_version >= "3.6"
 chardet==4.0.0; python_version >= "3.6" and python_full_version < "3.0.0" or python_full_version >= "3.5.0" and python_version >= "3.6"
 click==7.1.2; python_version >= "2.7" and python_full_version < "3.0.0" or python_full_version >= "3.5.0"
 colorama==0.4.4; python_version >= "3.7" and python_full_version < "3.0.0" and sys_platform == "win32" or sys_platform == "win32" and python_version >= "3.7" and python_full_version >= "3.5.0"
-coverage==5.3.1; python_version >= "2.7" and python_full_version < "3.0.0" or python_full_version >= "3.5.0" and python_version < "4"
-curtsies==0.3.5; python_version >= "3.6"
-cwcwidth==0.1.1; python_version >= "3.6"
+coverage==5.4; python_version >= "2.7" and python_full_version < "3.0.0" or python_full_version >= "3.5.0" and python_version < "4"
 decorator==4.4.2; python_version >= "3.7" and python_full_version < "3.0.0" or python_full_version >= "3.2.0" and python_version >= "3.7"
 deprecated==1.2.11; python_version >= "3.6" and python_full_version < "3.0.0" or python_full_version >= "3.4.0" and python_version >= "3.6"
 flake8==3.8.4; (python_version >= "2.7" and python_full_version < "3.0.0") or (python_full_version >= "3.4.0")
-greenlet==1.0.0; python_version >= "2.7" and python_full_version < "3.0.0" or python_full_version >= "3.5.0"
 h11==0.12.0; python_version >= "3.6"
 httptools==0.1.1
 idna==2.10; python_version >= "3.6" and python_full_version < "3.0.0" or python_full_version >= "3.5.0" and python_version >= "3.6"
@@ -28,7 +23,7 @@ markupsafe==1.1.1; python_version >= "2.7" and python_full_version < "3.0.0" or 
 mccabe==0.6.1; python_version >= "2.7" and python_full_version < "3.0.0" or python_full_version >= "3.4.0"
 mypy-extensions==0.4.3; python_version >= "3.5"
 mypy==0.800; python_version >= "3.5"
-nest-asyncio==1.4.3; python_version >= "3.5"
+nest-asyncio==1.5.1; python_version >= "3.5"
 newrelic==6.0.1.155; (python_version >= "2.7" and python_full_version < "3.0.0") or (python_full_version >= "3.5.0")
 packaging==20.8; python_version >= "3.6" and python_full_version < "3.0.0" or python_full_version >= "3.4.0" and python_version >= "3.6"
 parso==0.7.1; python_version >= "3.7" and python_full_version < "3.0.0" or python_full_version >= "3.5.0" and python_version >= "3.7"
@@ -50,13 +45,12 @@ pytest-mock==3.5.1; python_version >= "3.5"
 pytest-timeout==1.4.2
 pytest==6.2.2; python_version >= "3.6"
 requests==2.25.1; (python_version >= "2.7" and python_full_version < "3.0.0") or (python_full_version >= "3.5.0")
-six==1.15.0; python_version >= "3.6" and python_full_version < "3.0.0" or python_full_version >= "3.4.0" and python_version >= "3.6"
 starlette==0.14.1; python_version >= "3.6"
 toml==0.10.2; python_version >= "3.6" and python_full_version < "3.0.0" or python_full_version >= "3.3.0" and python_version >= "3.6"
 traitlets==5.0.5; python_version >= "3.7"
 typed-ast==1.4.2; python_version >= "3.5"
 typing-extensions==3.7.4.3; python_version >= "3.5"
-urllib3==1.26.2; python_version >= "3.6" and python_full_version < "3.0.0" or python_full_version >= "3.5.0" and python_version < "4" and python_version >= "3.6"
+urllib3==1.26.3; python_version >= "3.6" and python_full_version < "3.0.0" or python_full_version >= "3.5.0" and python_version < "4" and python_version >= "3.6"
 uvicorn==0.13.3
 uvloop==0.14.0
 wcwidth==0.2.5; python_full_version >= "3.6.1" and python_version >= "3.7"
