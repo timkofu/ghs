@@ -5,4 +5,20 @@
 
     <h1 class="title">Hi</h1>
 
+    <table>
+        {% for row in rows %}
+            <tr>
+                <td>{{ row['add_time'].date() }}</td>
+                <td>{{ row['name'] }}</td>
+                <td>{{ row['description'] }}</td>
+                <td>{{ row['language'] }}</td>
+                <td>{{ row['url'] }}</td>
+                <td>{{ row['initial_stars'] }}</td>
+                <td>{{ row['current_stars'] }}</td>
+                <td>{{ row['initial_fork_count'] }}</td>
+                <td>{{ row['current_fork_count'] }}</td>
+            </tr>
+        {% endfor %}
+    </table>
+
 {% endblock %}

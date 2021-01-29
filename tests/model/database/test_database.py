@@ -49,7 +49,7 @@ class TestDatabase:
 
         dbh = await self.gen_dbh()
 
-        result = await dbh.delete('DELETE FROM pro_lang')
+        result = await dbh.delete(('DELETE FROM pro_lang',))
         assert result == 'DELETE 1'
 
         with pytest.raises(ValueError):
