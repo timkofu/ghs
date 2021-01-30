@@ -5,7 +5,8 @@
 
     {% if rows %}
 
-        <table class="table">
+      <div class="table-container">
+        <table class="table is-hoverable">
             <thead>
                 <th>Saved On</th>
                 <th>Project Name</th>
@@ -31,28 +32,29 @@
                 </tr>
             {% endfor %}
         </table>
+      </div>
 
-        <nav class="pagination" role="navigation" aria-label="pagination">
-            <a class="pagination-previous">Previous</a>
-            <a class="pagination-next">Next page</a>
-            <ul class="pagination-list">
-              <li>
-                <a class="pagination-link" aria-label="Goto page 1">1</a>
-              </li>
-              <li>
-                <span class="pagination-ellipsis">&hellip;</span>
-              </li>
-              <li>
-                <a class="pagination-link is-current" aria-label="Page 46" aria-current="page">46</a>
-              </li>
-              <li>
-                <span class="pagination-ellipsis">&hellip;</span>
-              </li>
-              <li>
-                <a class="pagination-link" aria-label="Goto page 86">86</a>
-              </li>
-            </ul>
-          </nav>
+      <nav class="pagination" role="navigation" aria-label="pagination">
+          <a class="pagination-previous">Previous</a>
+          <a class="pagination-next">Next page</a>
+          <ul class="pagination-list">
+            <li>
+              <a class="pagination-link" aria-label="Goto page 1">1</a>
+            </li>
+            <li>
+              <span class="pagination-ellipsis">&hellip;</span>
+            </li>
+            <li>
+              <a class="pagination-link is-current" aria-label="Page 46" aria-current="page">46</a>
+            </li>
+            <li>
+              <span class="pagination-ellipsis">&hellip;</span>
+            </li>
+            <li>
+              <a class="pagination-link" aria-label="Goto page 86">86</a>
+            </li>
+          </ul>
+        </nav>
 
     {% else %}
         <h1 class="title">Hi</h1>
