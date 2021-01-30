@@ -3,22 +3,60 @@
 
 {% block body %}
 
-    <h1 class="title">Hi</h1>
+    {% if rows %}
 
-    <table>
-        {% for row in rows %}
-            <tr>
-                <td>{{ row['add_time'].date() }}</td>
-                <td>{{ row['name'] }}</td>
-                <td>{{ row['description'] }}</td>
-                <td>{{ row['language'] }}</td>
-                <td>{{ row['url'] }}</td>
-                <td>{{ row['initial_stars'] }}</td>
-                <td>{{ row['current_stars'] }}</td>
-                <td>{{ row['initial_fork_count'] }}</td>
-                <td>{{ row['current_fork_count'] }}</td>
-            </tr>
-        {% endfor %}
-    </table>
+        <table class="table">
+            <thead>
+                <th>Saved On</th>
+                <th>Project Name</th>
+                <th>Description</th>
+                <th>Programming Language</th>
+                <th>URL</th>
+                <th>Initial Stars</th>
+                <th>Current Stars</th>
+                <th>Initial Forks</th>
+                <th>Current Forks</th>
+            </thead>
+            {% for row in rows %}
+                <tr>
+                    <td>{{ row['add_time'].date() }}</td>
+                    <td>{{ row['name'] }}</td>
+                    <td>{{ row['description'] }}</td>
+                    <td>{{ row['language'] }}</td>
+                    <td>{{ row['url'] }}</td>
+                    <td>{{ row['initial_stars'] }}</td>
+                    <td>{{ row['current_stars'] }}</td>
+                    <td>{{ row['initial_fork_count'] }}</td>
+                    <td>{{ row['current_fork_count'] }}</td>
+                </tr>
+            {% endfor %}
+        </table>
+
+        <nav class="pagination" role="navigation" aria-label="pagination">
+            <a class="pagination-previous">Previous</a>
+            <a class="pagination-next">Next page</a>
+            <ul class="pagination-list">
+              <li>
+                <a class="pagination-link" aria-label="Goto page 1">1</a>
+              </li>
+              <li>
+                <span class="pagination-ellipsis">&hellip;</span>
+              </li>
+              <li>
+                <a class="pagination-link is-current" aria-label="Page 46" aria-current="page">46</a>
+              </li>
+              <li>
+                <span class="pagination-ellipsis">&hellip;</span>
+              </li>
+              <li>
+                <a class="pagination-link" aria-label="Goto page 86">86</a>
+              </li>
+            </ul>
+          </nav>
+
+    {% else %}
+        <h1 class="title">Hi</h1>
+    {% endif %}
+
 
 {% endblock %}

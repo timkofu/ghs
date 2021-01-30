@@ -39,7 +39,7 @@ class Database:
 
     async def delete(self, query: Any) -> asyncpg.Record:
 
-        if not query[0].startswith('DELETE'):
+        if not query[0].startswith(('DELETE', 'TRUNCATE')):
             raise ValueError("Not a DELETE query")
 
         async with self.db_handle.transaction():
