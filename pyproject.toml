@@ -13,7 +13,7 @@ asyncpg = "^0.21.0"
 httptools = "^0.1.1"
 PyGithub = "^1.54.1"
 newrelic = "^6.0.1"
-Jinja2 = "^2.11.2"
+Jinja2 = "^2.11.3"
 uvloop = "^0.14.0"
 requests = "^2.25.1"
 
