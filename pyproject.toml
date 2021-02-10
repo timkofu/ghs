@@ -8,7 +8,7 @@ license = "AGPLv3"
 [tool.poetry.dependencies]
 python = "^3.9"
 uvicorn = "^0.13.1"
-starlette = "^0.14.1"
+starlette = "^0.14.2"
 asyncpg = "^0.21.0"
 httptools = "^0.1.1"
 PyGithub = "^1.54.1"
