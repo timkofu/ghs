@@ -1,16 +1,16 @@
 
 from starlette.requests import Request
 from starlette.endpoints import HTTPEndpoint
-from starlette.responses import HTMLResponse
+from starlette.templating import _TemplateResponse
 
 from ghs.controller.stars.front import Pager
 
 from .templates.loader import templates_handle
 
 
-class Front(HTTPEndpoint):  # type: ignore
+class Front(HTTPEndpoint):
 
-    async def get(self, request: Request) -> HTMLResponse:
+    async def get(self, request: Request) -> _TemplateResponse:
 
         pager = Pager()
 
