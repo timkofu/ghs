@@ -1,5 +1,4 @@
 [run]
-source = ghs
 omit = 
     *test_*
     *__init__.py
