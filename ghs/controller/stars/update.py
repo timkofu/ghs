@@ -64,8 +64,8 @@ class Update:
                     project_name,
                     str(project.description),  # .replace("'", "''").replace('.', r'\.'),  # May be None, in which case 'None'
                     project.html_url,
-                    project.get_stargazers().totalCount,
-                    project.get_forks().totalCount,
+                    project.stargazers_count,
+                    project.forks_count,
                 )
 
                 query: str = """INSERT INTO project(
