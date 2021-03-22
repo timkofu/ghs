@@ -41,10 +41,10 @@ jobs:
         pytest
     - name: "Upload coverage to Codecov"
       uses: codecov/codecov-action@v1
+      env:
+        CODECOV_TOKEN=1f384cb3-05c0-4d59-806d-68a1c1e2d35f
       with:
         fail_ci_if_error: true
-      env:
-          CODECOV_TOKEN=1f384cb3-05c0-4d59-806d-68a1c1e2d35f
 
     ### Deploy to Heroku ###
     - name: Add Heroku remote
