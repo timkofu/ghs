@@ -13,10 +13,10 @@
                 <th>Description</th>
                 <th>Programming Language</th>
                 <th>URL</th>
-                <th>Initial Stars</th>
                 <th>Current Stars</th>
-                <th>Initial Forks</th>
+                <th>Initial Stars</th>
                 <th>Current Forks</th>
+                <th>Initial Forks</th>
             </thead>
             {% for row in rows %}
                 <tr>
@@ -25,10 +25,10 @@
                     <td>{{ row['description'] }}</td>
                     <td>{{ row['language'] }}</td>
                     <td>{{ row['url'] }}</td>
-                    <td>{{ row['initial_stars'] }}</td>
                     <td>{{ row['current_stars'] }}</td>
-                    <td>{{ row['initial_fork_count'] }}</td>
+                    <td>{{ row['initial_stars'] }}</td>
                     <td>{{ row['current_fork_count'] }}</td>
+                    <td>{{ row['initial_fork_count'] }}</td>
                 </tr>
             {% endfor %}
         </table>
