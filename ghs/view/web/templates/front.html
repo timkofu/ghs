@@ -8,19 +8,18 @@
       <div class="table-container">
         <table class="table is-hoverable">
             <thead>
-                <th>Saved On</th>
-                <th>Project Name</th>
-                <th>Description</th>
-                <th>Programming Language</th>
-                <th>URL</th>
-                <th>Current Stars</th>
-                <th>Initial Stars</th>
-                <th>Current Forks</th>
-                <th>Initial Forks</th>
+               <th>Project Name</th>
+               <th>Description</th>
+               <th>Programming Language</th>
+               <th>URL</th>
+               <th>Current Stars</th>
+               <th>Initial Stars</th>
+               <th>Current Forks</th>
+               <th>Initial Forks</th>
+               <th>Initial Scan Date</th>
             </thead>
             {% for row in rows %}
                 <tr>
-                    <td>{{ row['add_time'].date() }}</td>
                     <td>{{ row['name'] }}</td>
                     <td>{{ row['description'] }}</td>
                     <td>{{ row['language'] }}</td>
@@ -29,6 +28,7 @@
                     <td>{{ row['initial_stars'] }}</td>
                     <td>{{ row['current_fork_count'] }}</td>
                     <td>{{ row['initial_fork_count'] }}</td>
+                    <td>{{ row['add_time'].date() }}</td>
                 </tr>
             {% endfor %}
         </table>
