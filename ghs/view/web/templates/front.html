@@ -39,25 +39,19 @@
           <a class="pagination-next">Next page</a>
           <ul class="pagination-list">
             <li>
-              <a class="pagination-link" aria-label="Goto page 1">1</a>
+              <a class="pagination-link is-current" aria-label="Page 1" aria-current="page">1</a>
             </li>
             <li>
               <span class="pagination-ellipsis">&hellip;</span>
             </li>
             <li>
-              <a class="pagination-link is-current" aria-label="Page 46" aria-current="page">46</a>
-            </li>
-            <li>
-              <span class="pagination-ellipsis">&hellip;</span>
-            </li>
-            <li>
-              <a class="pagination-link" aria-label="Goto page 86">86</a>
+              <a class="pagination-link" aria-label="Goto page 2" onclick="alert('NotImplemented')">2</a>
             </li>
           </ul>
         </nav>
 
     {% else %}
-        <h1 class="title">Hi</h1>
+        <h1 class="title" onmouseover="alert('No Stars Yet.')">Hi</h1>
     {% endif %}
 
 
