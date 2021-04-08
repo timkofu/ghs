@@ -94,7 +94,7 @@ toml = ["toml"]
 
 [[package]]
 name = "decorator"
-version = "5.0.5"
+version = "5.0.6"
 description = "Decorators for Humans"
 category = "dev"
 optional = false
@@ -738,8 +738,8 @@ coverage = [
     {file = "coverage-5.5.tar.gz", hash = "sha256:ebe78fe9a0e874362175b02371bdfbee64d8edc42a044253ddf4ee7d3c15212c"},
 ]
 decorator = [
-    {file = "decorator-5.0.5-py3-none-any.whl", hash = "sha256:b7157d62ea3c2c0c57b81a05e4569853e976a3dda5dd7a1cb86be78978c3c5f8"},
-    {file = "decorator-5.0.5.tar.gz", hash = "sha256:acda948ffcfe4bd0c4a57834b74ad968b91925b8201b740ca9d46fb8c5c618ce"},
+    {file = "decorator-5.0.6-py3-none-any.whl", hash = "sha256:d9f2d2863183a3c0df05f4b786f2e6b8752c093b3547a558f287bf3022fd2bf4"},
+    {file = "decorator-5.0.6.tar.gz", hash = "sha256:f2e71efb39412bfd23d878e896a51b07744f2e2250b2e87d158e76828c5ae202"},
 ]
 deprecated = [
     {file = "Deprecated-1.2.12-py2.py3-none-any.whl", hash = "sha256:08452d69b6b5bc66e8330adde0a4f8642e969b9e1702904d137eeb29c8ffc771"},
