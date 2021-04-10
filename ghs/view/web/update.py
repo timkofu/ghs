@@ -1,4 +1,3 @@
-
 import os
 
 from starlette.requests import Request
@@ -11,12 +10,11 @@ from ghs.controller.stars.update import Update
 
 
 class UpdateStars(HTTPEndpoint):
-
     async def get(self, request: Request) -> PlainTextResponse:
 
-        cron_auth_token: str = str(request.path_params.get('update_auth_token'))
+        cron_auth_token: str = str(request.path_params.get("update_auth_token"))
 
-        if cron_auth_token and (cron_auth_token == os.getenv('UPDATE_AUTH_TOKEN')):
+        if cron_auth_token and (cron_auth_token == os.getenv("UPDATE_AUTH_TOKEN")):
             return PlainTextResponse("1", background=BackgroundTask(Update().stars))
         else:
-            raise HTTPException(403, detail='Invalid auth token.')
+            raise HTTPException(403, detail="Invalid auth token.")
