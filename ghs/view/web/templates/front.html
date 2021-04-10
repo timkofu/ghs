@@ -1,7 +1,18 @@
 
 {% extends "base.html" %}
 
+{% block headers %}
+  <link rel="preconnect" href="https://fonts.gstatic.com">
+  <link href="https://fonts.googleapis.com/css2?family=New+Tegomin&display=swap" rel="stylesheet"> 
+{% endblock %}
+
 {% block body %}
+
+  <h1 class="title is-vcentered" style="
+
+      font-family: 'New Tegomin', serif;
+
+  ">My GitHub Stars</h1>
 
     {% if rows %}
 
@@ -39,19 +50,39 @@
           <a class="pagination-next" onclick="alert('NotImplementedYet')">Next page</a>
           <ul class="pagination-list">
             <li>
-              <a class="pagination-link is-current" aria-label="current_page" aria-current="page">1</a>
+              <a class="pagination-link" aria-label="first">1</a>
             </li>
             <li>
               <span class="pagination-ellipsis">&hellip;</span>
             </li>
             <li>
-              <a class="pagination-link" aria-label="last_page" onclick="alert('NotImplementedYet')">2</a>
+              <span class="pagination-link is-current" aria-label="current">
+                {{page_details.current_page}}
+              </span>
+            </li>
+            <li>
+              <span class="pagination-ellipsis">&hellip;</span>
+            </li>
+            <li>
+              <a class="pagination-link" aria-label="last">
+                {{page_details.last_page}}
+              </a>
             </li>
           </ul>
         </nav>
 
     {% else %}
-        <h1 class="title" onclick="alert('No Stars Yet.')">Hi</h1>
+        {# <h1 class="title" onclick="alert('No Stars Yet.')">Hi</h1> #}
+        
+        <article class="message is-info">
+          <div class="message-header">
+            <p>Info</p>
+          </div>
+          <div class="message-body">
+            No Stars yet.
+          </div>
+        </article>
+
     {% endif %}
 
 

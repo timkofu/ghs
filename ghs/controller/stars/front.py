@@ -1,12 +1,10 @@
-
-import logging
 from typing import Any
 from ghs.model.database.database import Database
 
 
 class Pager:
 
-    __slots__ = ('dbh', 'offset', 'limit')
+    __slots__ = ("dbh", "offset", "limit")
 
     def __init__(self, dbh: Database = Database()) -> None:
         self.dbh: Database = dbh
