@@ -37,6 +37,7 @@ jobs:
         uses: github/codeql-action/init@v1
         with:
           languages: ${{ matrix.language }}
+          setup-python-dependencies: false # Because we installed them in the previous step
 
       - name: Perform CodeQL Analysis
         uses: github/codeql-action/analyze@v1
