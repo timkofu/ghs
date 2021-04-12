@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "ghs"
-version = "0.1.0"
+version = "2.0.0"
 description = "My GitHub Stars"
 authors = ["Timothy Makobu <timothy@makobu.io>"]
 license = "AGPLv3"
@@ -16,6 +16,9 @@ newrelic = "^6.0.1"
 Jinja2 = "^2.11.2"
 uvloop = "^0.15.0"
 requests = "^2.25.1"
+hiredis = "^2.0.0"
+redis = "^3.5.3"
+pydantic = "^1.8.1"
 
 [tool.poetry.dev-dependencies]
 pytest = "^6.2.1"
