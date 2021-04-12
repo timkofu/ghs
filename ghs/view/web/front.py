@@ -1,8 +1,7 @@
 from math import ceil
-from typing import Any, Union
+from typing import Any
 from starlette.requests import Request
 from starlette.endpoints import HTTPEndpoint
-from starlette.exceptions import HTTPException
 from starlette.templating import _TemplateResponse
 
 from ghs.controller.stars.front import Pager
@@ -13,7 +12,7 @@ from .templates.loader import templates_handle
 class Front(HTTPEndpoint):
     async def get(self, request: Request) -> _TemplateResponse:
 
-        wanted_page: Union[int, None] = request.path_params.get("wanted_page")
+        # wanted_page: Union[int, None] = request.path_params.get("wanted_page")
 
         pager = Pager()
 
