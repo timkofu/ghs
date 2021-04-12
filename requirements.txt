@@ -4,15 +4,19 @@ chardet==4.0.0; python_version >= "3.6" and python_full_version < "3.0.0" or pyt
 click==7.1.2; python_version >= "2.7" and python_full_version < "3.0.0" or python_full_version >= "3.5.0"
 deprecated==1.2.12; python_version >= "3.6" and python_full_version < "3.0.0" or python_full_version >= "3.4.0" and python_version >= "3.6"
 h11==0.12.0; python_version >= "3.6"
+hiredis==2.0.0; python_version >= "3.6"
 httptools==0.1.1
 idna==2.10; python_version >= "3.6" and python_full_version < "3.0.0" or python_full_version >= "3.5.0" and python_version >= "3.6"
 jinja2==2.11.3; (python_version >= "2.7" and python_full_version < "3.0.0") or (python_full_version >= "3.5.0")
 markupsafe==1.1.1; python_version >= "2.7" and python_full_version < "3.0.0" or python_full_version >= "3.5.0"
 newrelic==6.2.0.156; (python_version >= "2.7" and python_full_version < "3.0.0") or (python_full_version >= "3.5.0")
+pydantic==1.8.1; python_full_version >= "3.6.1"
 pygithub==1.54.1; python_version >= "3.6"
 pyjwt==1.7.1; python_version >= "3.6"
+redis==3.5.3; (python_version >= "2.7" and python_full_version < "3.0.0") or (python_full_version >= "3.5.0")
 requests==2.25.1; (python_version >= "2.7" and python_full_version < "3.0.0") or (python_full_version >= "3.5.0")
 starlette==0.14.2; python_version >= "3.6"
+typing-extensions==3.7.4.3; python_full_version >= "3.6.1"
 urllib3==1.26.4; python_version >= "3.6" and python_full_version < "3.0.0" or python_full_version >= "3.5.0" and python_version < "4" and python_version >= "3.6"
 uvicorn==0.13.4
 uvloop==0.15.2; python_version >= "3.7"
