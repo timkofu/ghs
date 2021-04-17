@@ -1,8 +1,10 @@
 import os
-from functools import partial
 from typing import Any
+from functools import partial
+from datetime import time, date, timedelta, datetime
 
 import asyncpg
+from cachetools import cached, TTLCache
 
 
 class Database:
@@ -31,6 +33,20 @@ class Database:
         async with self.db_handle.transaction():
             return await self.db_handle.fetchval(*query)
 
+    # Cache results from now untill a minute before midnight, as the stars
+    # are updated at midnight.
+    @cached(
+        cache=TTLCache(
+            maxsize=128,
+            ttl=(
+                (
+                    datetime.combine((date.today() + timedelta(days=1)), time())
+                    - timedelta(minutes=1)
+                )
+                - datetime.utcnow()
+            ).seconds,
+        )
+    )
     async def read(self, query: str) -> asyncpg.Record:
 
         if not query.startswith("SELECT"):
