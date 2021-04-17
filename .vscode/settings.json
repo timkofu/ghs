@@ -2,7 +2,7 @@
     "python.pythonPath": ".venv/bin/python",
     "python.linting.enabled": true,
     "python.linting.flake8Enabled": true,
-    "python.linting.flake8Args": ["--ignore=E501", "--verbose"],
+    "python.linting.flake8Args": ["--ignore=E501,W503", "--verbose"],
     "python.autoComplete.addBrackets": true,
     "files.exclude": {
         "**/*.egg*": true,
