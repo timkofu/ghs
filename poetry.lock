@@ -15,6 +15,17 @@ optional = false
 python-versions = "*"
 
 [[package]]
+name = "asyncache"
+version = "0.1.1"
+description = "Helpers to use cachetools with async functions"
+category = "main"
+optional = false
+python-versions = "*"
+
+[package.dependencies]
+cachetools = ">=2.1"
+
+[[package]]
 name = "asyncpg"
 version = "0.22.0"
 description = "An asyncio PostgreSQL driver"
@@ -719,7 +730,7 @@ python-versions = "*"
 [metadata]
 lock-version = "1.1"
 python-versions = "^3.9"
-content-hash = "27d3557f1f9f416f1bed7cc20ee5220a6e7d6eb1e660507d6b168494fb2492de"
+content-hash = "9ba00ef990ce82e4c3547344aed77bba99ce81192a5a1a013ecda010ae455585"
 
 [metadata.files]
 appdirs = [
@@ -729,6 +740,9 @@ appdirs = [
 appnope = [
     {file = "appnope-0.1.2-py2.py3-none-any.whl", hash = "sha256:93aa393e9d6c54c5cd570ccadd8edad61ea0c4b9ea7a01409020c9aa019eb442"},
     {file = "appnope-0.1.2.tar.gz", hash = "sha256:dd83cd4b5b460958838f6eb3000c660b1f9caf2a5b1de4264e941512f603258a"},
+]
+asyncache = [
+    {file = "asyncache-0.1.1.tar.gz", hash = "sha256:c741b3ccef2c5291b3da05d97bab3cc8d50f2ac8efd7fd79d47e3d7b6a3774de"},
 ]
 asyncpg = [
     {file = "asyncpg-0.22.0-cp35-cp35m-macosx_10_14_x86_64.whl", hash = "sha256:ccd75cfb4710c7e8debc19516e2e1d4c9863cce3f7a45a3822980d04b16f4fdd"},

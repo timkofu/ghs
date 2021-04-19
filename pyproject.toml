@@ -20,6 +20,7 @@ hiredis = "^2.0.0"
 redis = "^3.5.3"
 pydantic = "^1.8.1"
 cachetools = "^4.2.1"
+asyncache = "^0.1.1"
 
 [tool.poetry.dev-dependencies]
 pytest = "^6.2.1"
