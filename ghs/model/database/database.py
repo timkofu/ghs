@@ -4,7 +4,8 @@ from functools import partial
 from datetime import time, date, timedelta, datetime
 
 import asyncpg
-from cachetools import cached, TTLCache
+from asyncache import cached
+from cachetools import TTLCache
 
 
 class Database:

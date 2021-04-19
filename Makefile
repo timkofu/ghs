@@ -1,5 +1,5 @@
 test:
-	@poetry run dmypy run -- ghs tests --strict
+	@poetry run dmypy run -- ghs tests --strict --allow-untyped-decorators
 	@poetry run pytest --timeout=3
 
 dev_server:
