@@ -1,6 +1,5 @@
 import os
-from typing import Any
-from functools import partial
+from typing import Any, Union
 from datetime import time, date, timedelta, datetime
 
 import asyncpg
@@ -11,20 +10,21 @@ from cachetools import TTLCache
 class Database:
     """ Database interface """
 
+    @classmethod
+    async def get_database_handle(
+        cls, conn_creds: Union[dict[str, str], None] = None
+    ) -> Any:
+        dbh = cls()
+        if isinstance(conn_creds, dict):
+            dbh.db_handle = await asyncpg.connect(**conn_creds)
+        elif conn_creds is None:
+            dbh.db_handle = await asyncpg.connect(os.getenv("DATABASE_URL"))
+        return dbh
+
     __slots__ = ("db_handle",)
 
     def __init__(self) -> None:
         self.db_handle: asyncpg.connection.Connection = None
-
-    async def init_db(
-        self,
-        conn_coro: partial[
-            Any
-        ] = partial(  # partial so we can hand it different conn params
-            asyncpg.connect, os.getenv("DATABASE_URL")
-        ),
-    ) -> None:
-        self.db_handle = await conn_coro()
 
     async def upsert(self, query: Any) -> asyncpg.Record:
 

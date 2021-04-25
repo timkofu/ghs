@@ -1,4 +1,7 @@
-
 import os
 
-DEBUG = not os.getenv('PRODUCTION')
+from ghs.model.database import database
+
+DEBUG = not os.getenv("PRODUCTION")
+
+DATABASE_HANDLE = database.Database()
