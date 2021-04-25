@@ -7,17 +7,23 @@ from ghs.model.database.database import Database
 
 class Pager:
 
-    __slots__ = ("dbh", "offset", "limit", "total_pages")
+    __slots__ = ("dbh", "offset", "limit", "total_pages", "conn_creds")
 
-    def __init__(self, dbh: Database = Database()) -> None:
-        self.dbh: Database = dbh
+    def __init__(self, conn_creds: Union[dict[str, str], None] = None) -> None:
         self.limit: int = 20
         self.offset: int = 0
+        # self.dbh: Union[Database, None] = None
         self.total_pages: Union[int, Record, None] = None
+        self.conn_creds: Union[dict[str, str], None] = conn_creds
+
+    async def _set_dbh(self) -> None:
+        self.dbh: Database = await Database.get_database_handle()
+        if isinstance(self.conn_creds, dict):
+            self.dbh = await Database.get_database_handle(self.conn_creds)
 
     async def page(self) -> Any:
 
-        await self.dbh.init_db()
+        await self._set_dbh()
 
         self.total_pages = await self.dbh.read("SELECT count(*) FROM project")
         self.total_pages = int(self.total_pages[0]["count"]) // self.limit

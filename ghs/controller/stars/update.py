@@ -1,4 +1,3 @@
-
 import os
 import math
 import asyncio
@@ -13,40 +12,53 @@ from ghs.model.database.database import Database
 
 
 class Update:
-    ''' Fetch stars and store them in DB '''
+    """ Fetch stars and store them in DB """
 
-    __slots__ = ('ghh', 'dbh')
+    __slots__ = ("ghh", "dbh", "conn_creds")
 
     def __init__(
         self,
         ghh: Github = Github(login_or_token=os.getenv("GH_AUTH_TOKEN")),
-        dbh: Database = Database()
+        conn_creds: Union[dict[str, str], None] = None,
     ) -> None:
-        self.ghh = ghh
-        self.dbh = dbh
+        self.ghh: Github = ghh
+        self.conn_creds = conn_creds
+        # self.dbh: Union[Database, None] = None
+
+    async def _set_dbh(self) -> None:
+        self.dbh: Database = await Database.get_database_handle()
+        if isinstance(self.conn_creds, dict):
+            self.dbh = await Database.get_database_handle(conn_creds=self.conn_creds)
 
     async def _fetch_stars(self) -> AsyncGenerator[List[Repository], None]:
 
-        user: github.NamedUser.NamedUser = await asyncio.get_running_loop().run_in_executor(
-            None, self.ghh.get_user  # get the owner of the auth token
+        await self._set_dbh()
+
+        user: github.NamedUser.NamedUser = (
+            await asyncio.get_running_loop().run_in_executor(
+                None, self.ghh.get_user  # get the owner of the auth token
+            )
         )
-        stars: github.PaginatedList.PaginatedList[Repository] = await asyncio.get_running_loop().run_in_executor(
-            None, user.get_starred
-        )
+        stars: github.PaginatedList.PaginatedList[
+            Repository
+        ] = await asyncio.get_running_loop().run_in_executor(None, user.get_starred)
         pages: int = math.ceil(stars.totalCount / 30)  # GitHub pagination count
 
         for page in range(pages):
 
-            yield await asyncio.get_event_loop().run_in_executor(None, stars.get_page, page)
+            yield await asyncio.get_event_loop().run_in_executor(
+                None, stars.get_page, page
+            )
 
             # await asyncio.sleep(1)  # Give GH server a break
             # not needed apparently, GH can handle it
 
     async def stars(self) -> None:
 
+        await self._set_dbh()
+
         logging.getLogger("uvicorn").info("GHS: Starting update ...")
 
-        await self.dbh.init_db()
         current_stars: Set[str] = set()  # For use in removing unstared projects
 
         async for projects in self._fetch_stars():
@@ -62,7 +74,9 @@ class Update:
 
                 project_details = (
                     project_name,
-                    str(project.description),  # .replace("'", "''").replace('.', r'\.'),  # May be None, in which case 'None'
+                    str(
+                        project.description
+                    ),  # .replace("'", "''").replace('.', r'\.'),  # May be None, in which case 'None'
                     project.html_url,
                     project.stargazers_count,
                     project.forks_count,
@@ -86,27 +100,35 @@ class Update:
                     project_details[4],
                     project_details[1],
                     project_details[3],
-                    project_details[4]
+                    project_details[4],
                 )
 
                 project_id: int = await self.dbh.upsert((query, *args))
                 # Will implement batch inserts later
 
                 # Save a project's main programming language
-                language_id: int = await self.dbh.upsert((
-                    """INSERT INTO pro_lang(name) values($1) ON CONFLICT (name) DO UPDATE
+                language_id: int = await self.dbh.upsert(
+                    (
+                        """INSERT INTO pro_lang(name) values($1) ON CONFLICT (name) DO UPDATE
                     SET name = EXCLUDED.name
-                    RETURNING language_id""", project.language or "Undetected"  # Need to set it (name) so RETURNING can work
-                ))
+                    RETURNING language_id""",
+                        project.language
+                        or "Undetected",  # Need to set it (name) so RETURNING can work
+                    )
+                )
 
                 # Create many-to-many relationship
-                await self.dbh.upsert((
-                    "INSERT INTO pr_pl values($1, $2) ON CONFLICT DO NOTHING",
-                    *(language_id, project_id)
-                ))
+                await self.dbh.upsert(
+                    (
+                        "INSERT INTO pr_pl values($1, $2) ON CONFLICT DO NOTHING",
+                        *(language_id, project_id),
+                    )
+                )
 
         # Now we remove unstarred repos
-        stored_stars: Set[str] = {p['name'] for p in await self.dbh.read("SELECT name FROM project")}
+        stored_stars: Set[str] = {
+            p["name"] for p in await self.dbh.read("SELECT name FROM project")
+        }
         fallen_stars: Set[str] = stored_stars - current_stars
 
         for star in fallen_stars:
