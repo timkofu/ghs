@@ -10,7 +10,7 @@ python = "^3.9"
 uvicorn = "^0.13.1"
 starlette = "^0.14.1"
 asyncpg = "^0.22.0"
-httptools = "^0.1.1"
+httptools = "^0.2.0"
 PyGithub = "^1.54.1"
 newrelic = "^6.0.1"
 Jinja2 = "^2.11.2"
@@ -34,7 +34,7 @@ pytest-timeout = "^1.4.2"
 nest-asyncio = "^1.4.3"
 ipython = "^7.19.0"
 jedi = "<0.18.0"
-black = "^20.8b1"
+black = "^21.4b0"
 
 [build-system]
 requires = ["poetry-core>=1.0.0"]
