@@ -19,7 +19,7 @@ requests = "^2.25.1"
 hiredis = "^2.0.0"
 redis = "^3.5.3"
 pydantic = "^1.8.1"
-cachetools = "^4.2.1"
+cachetools = "^4.2.2"
 asyncache = "^0.1.1"
 
 [tool.poetry.dev-dependencies]
