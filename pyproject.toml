@@ -32,7 +32,7 @@ pytest-mock = "^3.4.0"
 flake8 = "^3.8.4"
 pytest-timeout = "^1.4.2"
 nest-asyncio = "^1.4.3"
-ipython = "^7.19.0"
+ipython = "^7.23.0"
 jedi = "<0.18.0"
 black = "^21.4b0"
 
