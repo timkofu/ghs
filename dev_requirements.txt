@@ -22,7 +22,7 @@ httptools==0.2.0
 idna==2.10; python_version >= "3.6" and python_full_version < "3.0.0" or python_full_version >= "3.5.0" and python_version >= "3.6"
 iniconfig==1.1.1; python_version >= "3.6"
 ipython-genutils==0.2.0; python_version >= "3.7"
-ipython==7.23.0; python_version >= "3.7"
+ipython==7.23.1; python_version >= "3.7"
 jedi==0.17.2; (python_version >= "2.7" and python_full_version < "3.0.0") or (python_full_version >= "3.5.0")
 jinja2==2.11.3; (python_version >= "2.7" and python_full_version < "3.0.0") or (python_full_version >= "3.5.0")
 markupsafe==1.1.1; python_version >= "2.7" and python_full_version < "3.0.0" or python_full_version >= "3.5.0"
