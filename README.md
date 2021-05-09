@@ -1,6 +1,6 @@
 # GitHub Star
 
-A web-app to help keep track of your GitHub starred repos.
+A~n RND project of mine~ web-app to help keep track of your GitHub starred repos.
 
 ### Screen Shot
 
