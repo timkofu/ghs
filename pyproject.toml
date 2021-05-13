@@ -18,7 +18,7 @@ uvloop = "^0.15.0"
 requests = "^2.25.1"
 hiredis = "^2.0.0"
 redis = "^3.5.3"
-pydantic = "^1.8.1"
+pydantic = "^1.8.2"
 cachetools = "^4.2.1"
 asyncache = "^0.1.1"
 
