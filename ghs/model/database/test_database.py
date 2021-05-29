@@ -2,8 +2,8 @@ import os
 
 import pytest
 
-if os.getenv("CI"):
-    pytest.skip("No PostgreSQL on GH Actions CI/CD", allow_module_level=True)
+# if os.getenv("CI"):
+pytest.skip("No PostgreSQL on GH Actions CI/CD", allow_module_level=True)
 
 from ghs.model.database.database import Database
 

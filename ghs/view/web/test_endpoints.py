@@ -7,7 +7,6 @@ import pytest
 if os.getenv('CI'):
     pytest.skip("No PostgreSQL on GH Actions CI/CD", allow_module_level=True)
 
-from requests.models import Response
 from starlette.testclient import TestClient
 
 from ghs.view.web.endpoints import app
