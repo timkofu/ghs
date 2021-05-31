@@ -10,7 +10,7 @@ class Pager:
     __slots__ = ("dbh", "offset", "limit", "total_pages", "conn_creds")
 
     def __init__(self, conn_creds: Union[dict[str, str], None] = None) -> None:
-        self.limit: int = 20
+        self.limit: int = 100
         self.offset: int = 0
         # self.dbh: Union[Database, None] = None
         self.total_pages: Union[int, Record, None] = None

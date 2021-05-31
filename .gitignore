@@ -10,4 +10,3 @@ dist
 .ipynb_checkpoints
 .venv
 .dmypy.json
-.idea
