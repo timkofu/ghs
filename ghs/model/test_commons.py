@@ -1,5 +1,5 @@
 
-from ghs.controller.commons import DEBUG
+from ghs.model.commons import DEBUG
 
 import pytest
 pytestmark = pytest.mark.asyncio

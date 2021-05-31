@@ -7,7 +7,7 @@
 {% endblock %} {% block body %}
 
 <h1 class="title is-vcentered" style="font-family: 'New Tegomin', serif">
-  My GitHub Stars
+  My Top 100 GitHub Stars
 </h1>
 
 {% if rows %}
@@ -41,6 +41,7 @@
   </table>
 </div>
 
+{#
 <nav class="pagination" role="navigation" aria-label="pagination">
   <a class="pagination-previous" onclick="alert('NotImplementedYet')"
     >Previous</a
@@ -77,8 +78,7 @@
     </li>
   </ul>
 </nav>
-
-{% else %}
+#} {% else %}
 
 <article class="message is-info">
   <div class="message-header">
