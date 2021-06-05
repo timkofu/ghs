@@ -40,8 +40,15 @@ class TestDatabase:
 
         dbh = await Database.get_database_handle()
 
-        result = await dbh.delete(("TRUNCATE pro_lang CASCADE",))
-        assert result in ("DELETE 1", "TRUNCATE TABLE")
+        del_commands: tuple[str, ...] = (
+            "TRUNCATE project CASCADE",
+            "TRUNCATE pro_lang CASCADE",
+        )
+
+        for del_cmd in del_commands:
+            result = await dbh.delete((del_cmd,))
+            assert result in ("DELETE 1", "TRUNCATE TABLE")
 
         # with pytest.raises(ValueError):
+        assert await dbh.read("SELECT name FROM project") == []
         assert await dbh.read("SELECT name FROM pro_lang") == []
