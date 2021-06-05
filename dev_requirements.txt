@@ -1,6 +1,7 @@
 alembic==1.6.5; (python_version >= "2.7" and python_full_version < "3.0.0") or (python_full_version >= "3.6.0")
 appdirs==1.4.4; python_full_version >= "3.6.2"
 appnope==0.1.2; sys_platform == "darwin" and python_version >= "3.7"
+asgiref==3.3.4; python_version >= "3.6"
 asyncache==0.1.1
 asyncpg==0.23.0; python_full_version >= "3.5.0"
 atomicwrites==1.4.0; python_version >= "3.6" and python_full_version < "3.0.0" and sys_platform == "win32" or sys_platform == "win32" and python_version >= "3.6" and python_full_version >= "3.4.0"
@@ -11,8 +12,8 @@ cachetools==4.2.2; python_version >= "3.5" and python_version < "4.0"
 certifi==2021.5.30; python_version >= "3.6" and python_full_version < "3.0.0" or python_full_version >= "3.5.0" and python_version >= "3.6"
 cffi==1.14.5; python_version >= "3.6" and python_full_version < "3.0.0" or python_full_version >= "3.4.0" and python_version >= "3.6"
 chardet==4.0.0; python_version >= "3.6" and python_full_version < "3.0.0" or python_full_version >= "3.5.0" and python_version >= "3.6"
-click==7.1.2; python_full_version >= "3.6.2"
-colorama==0.4.4; python_version >= "3.7" and python_full_version < "3.0.0" and sys_platform == "win32" or sys_platform == "win32" and python_version >= "3.7" and python_full_version >= "3.5.0"
+click==8.0.1; python_version >= "3.6" and python_full_version >= "3.6.2"
+colorama==0.4.4; python_version >= "3.7" and python_full_version < "3.0.0" and sys_platform == "win32" and platform_system == "Windows" or sys_platform == "win32" and python_version >= "3.7" and python_full_version >= "3.5.0" and platform_system == "Windows"
 coverage==5.5; python_version >= "2.7" and python_full_version < "3.0.0" or python_full_version >= "3.5.0" and python_version < "4"
 decorator==5.0.9; python_version >= "3.7"
 deprecated==1.2.12; python_version >= "3.6" and python_full_version < "3.0.0" or python_full_version >= "3.4.0" and python_version >= "3.6"
@@ -71,7 +72,7 @@ traitlets==5.0.5; python_version >= "3.7"
 typed-ast==1.4.3; python_version >= "3.5"
 typing-extensions==3.10.0.0; python_full_version >= "3.6.1" and python_version >= "3.5"
 urllib3==1.26.5; python_version >= "3.6" and python_full_version < "3.0.0" or python_full_version >= "3.5.0" and python_version < "4" and python_version >= "3.6"
-uvicorn==0.13.4
+uvicorn==0.14.0
 uvloop==0.15.2; python_version >= "3.7"
 wcwidth==0.2.5; python_full_version >= "3.6.1" and python_version >= "3.7"
 wrapt==1.12.1; python_version >= "3.6" and python_full_version < "3.0.0" or python_full_version >= "3.4.0" and python_version >= "3.6"
