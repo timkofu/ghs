@@ -8,7 +8,7 @@ from cachetools import TTLCache
 
 
 class Database:
-    """ Database interface """
+    """Database interface"""
 
     @classmethod
     async def get_database_handle(
@@ -56,7 +56,7 @@ class Database:
         async with self.db_handle.transaction():
             return await self.db_handle.fetch(query)
 
-    async def delete(self, query: Any) -> asyncpg.Record:
+    async def delete(self, query: tuple[str, ...]) -> asyncpg.Record:
 
         if not query[0].startswith(("DELETE", "TRUNCATE")):
             raise ValueError("Not a DELETE query")
