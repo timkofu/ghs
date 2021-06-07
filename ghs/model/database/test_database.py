@@ -1,13 +1,10 @@
 import os
-import multiprocessing
 from typing import Any
 
 import pytest
 
 if os.getenv("CI"):
     pytest.skip("No PostgreSQL on GH Actions CI/CD", allow_module_level=True)
-
-from pytest import CaptureFixture
 
 from ghs.model.database.database import Database
 

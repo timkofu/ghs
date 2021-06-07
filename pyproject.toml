@@ -21,8 +21,6 @@ redis = "^3.5.3"
 pydantic = "^1.8.1"
 cachetools = "^4.2.1"
 asyncache = "^0.1.1"
-SQLAlchemy = "^1.4.16"
-alembic = "^1.6.5"
 
 [tool.poetry.dev-dependencies]
 pytest = "^6.2.1"
