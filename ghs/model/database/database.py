@@ -13,7 +13,7 @@ class Database:
     @classmethod
     async def get_database_handle(
         cls, conn_creds: Union[dict[str, str], None] = None
-    ) -> Any:
+    ) -> asyncpg.connection.Connection:
         dbh = cls()
         if isinstance(conn_creds, dict):
             dbh.db_handle = await asyncpg.connect(**conn_creds)
