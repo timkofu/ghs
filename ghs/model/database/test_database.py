@@ -1,5 +1,4 @@
 import os
-from typing import Any
 
 import pytest
 
@@ -28,6 +27,7 @@ class TestDatabase:
         )
         assert isinstance(result, int)
 
+        # Test that the method only takes INSERT commands
         with pytest.raises(ValueError):
             await dbh.upsert(("SELECT * FROM pro_lang",))
 
