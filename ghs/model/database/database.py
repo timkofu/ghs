@@ -2,9 +2,10 @@ import os
 from typing import Any, Union
 from datetime import time, date, timedelta, datetime
 
-import asyncpg
 from asyncache import cached
 from cachetools import TTLCache
+from asyncpg import connect, Record
+from asyncpg.connection import Connection
 
 
 class Database:
@@ -13,20 +14,20 @@ class Database:
     @classmethod
     async def get_database_handle(
         cls, conn_creds: Union[dict[str, str], None] = None
-    ) -> asyncpg.connection.Connection:
+    ) -> Connection:
         dbh = cls()
         if isinstance(conn_creds, dict):
-            dbh.db_handle = await asyncpg.connect(**conn_creds)
+            dbh.db_handle = await connect(**conn_creds)
         elif conn_creds is None:
-            dbh.db_handle = await asyncpg.connect(os.getenv("DATABASE_URL"))
+            dbh.db_handle = await connect(os.getenv("DATABASE_URL"))
         return dbh
 
     __slots__ = ("db_handle",)
 
     def __init__(self) -> None:
-        self.db_handle: asyncpg.connection.Connection = None
+        self.db_handle: Connection = None
 
-    async def upsert(self, query: Any) -> asyncpg.Record:
+    async def upsert(self, query: Any) -> Record:
 
         if not query[0].startswith("INSERT"):
             raise ValueError("Not an INSERT query")
@@ -48,7 +49,7 @@ class Database:
             ).seconds,
         )
     )
-    async def read(self, query: str) -> asyncpg.Record:
+    async def read(self, query: str) -> Record:
 
         if not query.startswith("SELECT"):
             raise ValueError("Not a SELECT query")
@@ -56,7 +57,7 @@ class Database:
         async with self.db_handle.transaction():
             return await self.db_handle.fetch(query)
 
-    async def delete(self, query: tuple[str, ...]) -> asyncpg.Record:
+    async def delete(self, query: tuple[str, ...]) -> Record:
 
         if not query[0].startswith(("DELETE", "TRUNCATE")):
             raise ValueError("Not a DELETE query")
