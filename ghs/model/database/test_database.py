@@ -6,13 +6,15 @@ import pytest
 if os.getenv("CI"):
     pytest.skip("No PostgreSQL on GH Actions CI/CD", allow_module_level=True)
 
+from asyncpg.connection import Connection
+
 from ghs.model.database.database import Database
 
 pytestmark = pytest.mark.asyncio
 
 
 class TestDatabase:
-    async def get_dbh(self) -> Any:
+    async def get_dbh(self) -> Connection:
         return await Database.get_database_handle(
             conn_creds=dict(user="testdb", password="testdb", database="testdb")
         )
