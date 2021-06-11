@@ -10,7 +10,7 @@ dmypy stop
 EXIT_CODES+=( $? )
 poetry export --without-hashes -f requirements.txt > requirements.txt
 EXIT_CODES+=( $? )
-git add pyproject.toml poetry.lock requirements.txt dev_requirements.txt doc
+git add pyproject.toml poetry.lock requirements.txt doc
 EXIT_CODES+=( $? )
 
 # Check that all commands exited with success (0), and if not, stop the commit
