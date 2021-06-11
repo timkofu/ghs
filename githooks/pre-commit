@@ -10,8 +10,6 @@ dmypy stop
 EXIT_CODES+=( $? )
 poetry export --without-hashes -f requirements.txt > requirements.txt
 EXIT_CODES+=( $? )
-poetry export --dev --without-hashes -f requirements.txt > dev_requirements.txt
-EXIT_CODES+=( $? )
 git add pyproject.toml poetry.lock requirements.txt dev_requirements.txt doc
 EXIT_CODES+=( $? )
 
