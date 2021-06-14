@@ -21,10 +21,11 @@ redis = "^3.5.3"
 pydantic = "^1.8.1"
 cachetools = "^4.2.1"
 asyncache = "^0.1.1"
+types-cachetools = "^0.1.7"
 
 [tool.poetry.dev-dependencies]
 pytest = "^6.2.1"
-mypy = "^0.812"
+mypy = "^0.902"
 pyflakes = "^2.2.0"
 pytest-asyncio = "^0.15.0"
 pytest-cov = "^2.10.1"
