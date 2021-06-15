@@ -1,5 +1,5 @@
 
-FROM python:3.9.5-buster
+FROM python:3.9.5-slim-buster
 
 LABEL name="@timkofu"
 
