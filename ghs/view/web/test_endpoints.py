@@ -1,6 +1,3 @@
-from _pytest.outcomes import importorskip
-
-
 import os
 import pytest
 
