@@ -1,3 +1,4 @@
+anyio==3.2.0; python_full_version >= "3.6.2" and python_version >= "3.6"
 asgiref==3.3.4; python_version >= "3.6"
 asyncache==0.1.1
 asyncpg==0.23.0; python_full_version >= "3.5.0"
@@ -11,10 +12,10 @@ deprecated==1.2.12; python_version >= "3.6" and python_full_version < "3.0.0" or
 h11==0.12.0; python_version >= "3.6"
 hiredis==2.0.0; python_version >= "3.6"
 httptools==0.2.0
-idna==2.10; python_version >= "3.6" and python_full_version < "3.0.0" or python_full_version >= "3.5.0" and python_version >= "3.6"
+idna==2.10; python_full_version >= "3.6.2" and python_version >= "3.6" and (python_version >= "3.6" and python_full_version < "3.0.0" or python_full_version >= "3.5.0" and python_version >= "3.6")
 jinja2==3.0.1; python_version >= "3.6"
 markupsafe==2.0.1; python_version >= "3.6"
-newrelic==6.4.1.158; (python_version >= "2.7" and python_full_version < "3.0.0") or (python_full_version >= "3.6.0")
+newrelic==6.4.2.159; (python_version >= "2.7" and python_full_version < "3.0.0") or (python_full_version >= "3.6.0")
 pycparser==2.20; python_version >= "3.6" and python_full_version < "3.0.0" or python_full_version >= "3.4.0" and python_version >= "3.6"
 pydantic==1.8.2; python_full_version >= "3.6.1"
 pygithub==1.55; python_version >= "3.6"
@@ -23,8 +24,9 @@ pynacl==1.4.0; python_version >= "3.6" and python_full_version < "3.0.0" or pyth
 redis==3.5.3; (python_version >= "2.7" and python_full_version < "3.0.0") or (python_full_version >= "3.5.0")
 requests==2.25.1; (python_version >= "2.7" and python_full_version < "3.0.0") or (python_full_version >= "3.5.0")
 six==1.16.0; python_version >= "3.6" and python_full_version < "3.0.0" or python_full_version >= "3.4.0" and python_version >= "3.6"
-starlette==0.14.2; python_version >= "3.6"
-types-cachetools==0.1.7
+sniffio==1.2.0; python_full_version >= "3.6.2" and python_version >= "3.6"
+starlette==0.15.0; python_version >= "3.6"
+types-cachetools==0.1.8
 typing-extensions==3.10.0.0; python_full_version >= "3.6.1"
 urllib3==1.26.5; python_version >= "3.6" and python_full_version < "3.0.0" or python_full_version >= "3.5.0" and python_version < "4" and python_version >= "3.6"
 uvicorn==0.14.0
