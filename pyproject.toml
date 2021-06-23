@@ -21,7 +21,7 @@ redis = "^3.5.3"
 pydantic = "^1.8.1"
 cachetools = "^4.2.1"
 asyncache = "^0.1.1"
-types-cachetools = "^0.1.7"
+types-cachetools = "^0.1.8"
 
 [tool.poetry.dev-dependencies]
 pytest = "^6.2.1"
