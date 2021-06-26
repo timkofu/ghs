@@ -1,6 +1,6 @@
 # GitHub Star
 
-A web-app to help analyse my GitHub starred repos.
+A web-app to help analyse GitHub repos I've starred.
 
 [![Deploy](https://www.herokucdn.com/deploy/button.svg)](https://heroku.com/deploy)
 
