@@ -36,9 +36,9 @@ jobs:
           pip install -r requirements.txt
           pip install pytest pytest-cov pytest-asyncio
 
-      - name: Run Tests
-        run: |
-          pytest
+      # - name: Run Tests
+      #   run: |
+      #     pytest
 
       # ### Deploy to Heroku ###
       # - name: Add Heroku remote
