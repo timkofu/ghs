@@ -9,8 +9,7 @@ WORKDIR /app
 # set environment variables
 ENV PYTHONDONTWRITEBYTECODE 1
 ENV PYTHONUNBUFFERED 1
-ENV PRODUCTION 1
-ENV NEW_RELIC_CONFIG_FILE=newrelic.ini 
+ENV PRODUCTION 1 
 
 # copy project
 COPY . .
@@ -24,4 +23,4 @@ RUN useradd -ms /bin/bash ghs
 USER ghs
 
 # run uvicorn
-CMD newrelic-admin run-program uvicorn legacy_ghs.view.web.endpoints:app --host 0.0.0.0 --port $PORT  --loop uvloop --http httptools --interface asgi3 --log-level info
+CMD uvicorn legacy_ghs.view.web.endpoints:app --host 0.0.0.0 --port $PORT  --loop uvloop --http httptools --interface asgi3 --log-level info
