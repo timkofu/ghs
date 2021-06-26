@@ -1,6 +1,6 @@
 from typing import Any, Union
 
-from ghs.model.database.database import Database
+from legacy_ghs.model.database.database import Database
 
 
 class Pager:

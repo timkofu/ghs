@@ -6,7 +6,7 @@ if os.getenv("CI"):
 
 from starlette.testclient import TestClient
 
-from ghs.view.web.endpoints import app
+from legacy_ghs.view.web.endpoints import app
 
 
 pytestmark = pytest.mark.asyncio
