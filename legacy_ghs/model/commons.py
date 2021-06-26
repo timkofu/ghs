@@ -1,6 +1,6 @@
 import os
 
-from ghs.model.database import database
+from legacy_ghs.model.database import database
 
 DEBUG = not os.getenv("PRODUCTION")
 

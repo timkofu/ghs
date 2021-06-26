@@ -1,4 +1,4 @@
-from ghs.model.commons import DEBUG
+from legacy_ghs.model.commons import DEBUG
 
 
 def test_is_debug() -> None:

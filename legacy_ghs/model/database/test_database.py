@@ -7,7 +7,7 @@ if os.getenv("CI"):
 
 from asyncpg.connection import Connection
 
-from ghs.model.database.database import Database
+from legacy_ghs.model.database.database import Database
 
 pytestmark = pytest.mark.asyncio
 

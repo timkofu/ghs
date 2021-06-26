@@ -8,11 +8,11 @@ import github
 from github import Github
 from github.Repository import Repository
 
-from ghs.model.database.database import Database
+from legacy_ghs.model.database.database import Database
 
 
 class Update:
-    """ Fetch stars and store them in DB """
+    """Fetch stars and store them in DB"""
 
     __slots__ = ("ghh", "dbh", "conn_creds")
 
