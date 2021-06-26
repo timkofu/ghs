@@ -1,6 +1,6 @@
 test:
 	@poetry run dmypy run -- ghs --strict
-	@poetry run pytest
+	# @poetry run pytest
 
 dev_server:
 	@uvicorn ghs.view.web.endpoints:app --host 127.0.0.1 --port 8008 --loop uvloop --http httptools --interface asgi3 --log-level info --reload
