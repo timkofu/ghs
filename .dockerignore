@@ -1,0 +1,16 @@
+Dockerfile
+README.md
+*.pyc
+*.pyo
+*.pyd
+__pycache__
+pytest.ini
+.DS_Store
+.coverage
+.coveragerc
+.github
+.git
+githooks
+.venv
+.dmypy.json
+*test_*
