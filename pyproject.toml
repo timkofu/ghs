@@ -20,7 +20,6 @@ asyncache = "^0.1.1"
 types-cachetools = "^0.1.7"
 SQLAlchemy = "^1.4.20"
 alembic = "^1.6.5"
-Rx = "^3.2.0"
 
 [tool.poetry.dev-dependencies]
 pytest = "^6.2.1"
