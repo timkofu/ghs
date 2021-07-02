@@ -8,7 +8,7 @@ import github
 from github import Github
 from github.Repository import Repository
 
-from legacy_ghs.model.database.database import Database
+from ghs.model.infrastructure.database.database import Database
 
 
 class Update:

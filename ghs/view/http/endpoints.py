@@ -7,7 +7,7 @@ from .front import Front
 from .update import UpdateStars
 from .heroku_insomnia import HerokuInsomnia
 
-from legacy_ghs.model.commons import DEBUG
+from ghs.model.commons import DEBUG
 
 
 app = Starlette(

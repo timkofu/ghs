@@ -6,7 +6,7 @@ if os.getenv("CI"):
     pytest.skip("No PostgreSQL on GH Actions CI/CD", allow_module_level=True)
 
 
-from legacy_ghs.controller.stars.front import Pager
+from ghs.model.application.front import Pager
 
 pytestmark = pytest.mark.asyncio
 
