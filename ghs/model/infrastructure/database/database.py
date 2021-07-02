@@ -4,7 +4,10 @@ from datetime import time, date, timedelta, datetime
 
 from asyncache import cached
 from cachetools import TTLCache
-from asyncpg import connect, Record
+from asyncpg import (
+    connect,
+)  # , Record  -- will need to be Any as the docs say "Record objects currently cannot be created from Python code."
+
 from asyncpg.connection import Connection
 
 
@@ -27,7 +30,7 @@ class Database:
     def __init__(self) -> None:
         self.db_handle: Connection = None
 
-    async def upsert(self, query: Any) -> Record:
+    async def upsert(self, query: Any) -> Any:
 
         if not query[0].startswith("INSERT"):
             raise ValueError("Not an INSERT query")
@@ -48,8 +51,8 @@ class Database:
                 - datetime.utcnow()
             ).seconds,
         )
-    )
-    async def read(self, query: str) -> Record:
+    )  # type: ignore
+    async def read(self, query: str) -> Any:
 
         if not query.startswith("SELECT"):
             raise ValueError("Not a SELECT query")
@@ -57,7 +60,7 @@ class Database:
         async with self.db_handle.transaction():
             return await self.db_handle.fetch(query)
 
-    async def delete(self, query: tuple[str, ...]) -> Record:
+    async def delete(self, query: tuple[str, ...]) -> Any:
 
         if not query[0].startswith(("DELETE", "TRUNCATE")):
             raise ValueError("Not a DELETE query")
