@@ -6,7 +6,7 @@ from starlette.exceptions import HTTPException
 from starlette.background import BackgroundTask
 from starlette.responses import PlainTextResponse
 
-from legacy_ghs.controller.stars.update import Update
+from ghs.model.application.update import Update
 
 
 class UpdateStars(HTTPEndpoint):
