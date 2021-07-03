@@ -1,4 +1,5 @@
 import os
+from typing import cast
 
 import pytest
 
@@ -13,9 +14,12 @@ pytestmark = pytest.mark.asyncio
 
 
 class TestDatabase:
-    async def get_dbh(self) -> Connection:
-        return await Database.get_database_handle(
-            conn_creds=dict(user="testdb", password="testdb", database="testdb")
+    async def get_dbh(self) -> Database:
+        return cast(
+            Database,
+            await Database.get_database_handle(
+                conn_creds=dict(user="testdb", password="testdb", database="testdb")
+            ),
         )
 
     async def test_upsert(self) -> None:
@@ -28,7 +32,7 @@ class TestDatabase:
         assert isinstance(result, int)
 
         # Test that the method only takes INSERT commands
-        with pytest.raises(ValueError):
+        with pytest.raises(ValueError):  # type: ignore
             await dbh.upsert(("SELECT * FROM pro_lang",))
 
     async def test_read(self) -> None:
@@ -39,7 +43,7 @@ class TestDatabase:
         assert result[0].get("name") == "Python"
         # assert isinstance(result, list)
 
-        with pytest.raises(ValueError):
+        with pytest.raises(ValueError):  # type: ignore
             await dbh.read("INSERT INTO pro_lang(name) VALUES('Javascript')")
 
     async def test_delete(self) -> None:

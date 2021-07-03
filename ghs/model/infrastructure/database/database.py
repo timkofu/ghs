@@ -1,5 +1,5 @@
 import os
-from typing import Any, Union
+from typing import Any
 from datetime import time, date, timedelta, datetime
 
 from asyncache import cached
@@ -15,28 +15,26 @@ class Database:
     """Database interface"""
 
     @classmethod
-    async def get_database_handle(
-        cls, conn_creds: Union[dict[str, str], None] = None
-    ) -> Connection:
+    async def get_database_handle(cls, conn_creds: dict[str, str]) -> object:
         dbh = cls()
-        if isinstance(conn_creds, dict):
+        if conn_creds:
             dbh.db_handle = await connect(**conn_creds)
-        elif conn_creds is None:
+        else:
             dbh.db_handle = await connect(os.getenv("DATABASE_URL"))
         return dbh
 
     __slots__ = ("db_handle",)
 
     def __init__(self) -> None:
-        self.db_handle: Connection = None
+        self.db_handle: Connection
 
     async def upsert(self, query: Any) -> Any:
 
         if not query[0].startswith("INSERT"):
             raise ValueError("Not an INSERT query")
 
-        async with self.db_handle.transaction():
-            return await self.db_handle.fetchval(*query)
+        async with self.db_handle.transaction():  # type: ignore
+            return await self.db_handle.fetchval(*query)  # type: ignore
 
     # Cache results from now untill a minute before midnight, as the stars
     # are updated at midnight.
@@ -51,19 +49,19 @@ class Database:
                 - datetime.utcnow()
             ).seconds,
         )
-    )  # type: ignore
+    )
     async def read(self, query: str) -> Any:
 
         if not query.startswith("SELECT"):
             raise ValueError("Not a SELECT query")
 
-        async with self.db_handle.transaction():
-            return await self.db_handle.fetch(query)
+        async with self.db_handle.transaction():  # type: ignore
+            return await self.db_handle.fetch(query)  # type: ignore
 
     async def delete(self, query: tuple[str, ...]) -> Any:
 
         if not query[0].startswith(("DELETE", "TRUNCATE")):
             raise ValueError("Not a DELETE query")
 
-        async with self.db_handle.transaction():
-            return await self.db_handle.execute(*query)
+        async with self.db_handle.transaction():  # type: ignore
+            return await self.db_handle.execute(*query)  # type: ignore

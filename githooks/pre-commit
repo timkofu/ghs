@@ -6,8 +6,6 @@ poetry update
 EXIT_CODES=( $? )
 make deploy
 EXIT_CODES+=( $? )
-dmypy stop
-EXIT_CODES+=( $? )
 poetry export --without-hashes -f requirements.txt > requirements.txt
 EXIT_CODES+=( $? )
 git add pyproject.toml poetry.lock requirements.txt doc

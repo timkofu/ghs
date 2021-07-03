@@ -1,5 +1,4 @@
 test:
-	@poetry run dmypy run -- ghs --strict
 	@poetry run pytest
 
 dev_server:
