@@ -2,9 +2,8 @@ import os
 import math
 import asyncio
 import logging
-from typing import List, AsyncGenerator, Set, Tuple, Union
+from typing import List, AsyncGenerator, Set, Tuple, Union, cast
 
-import github
 from github import Github
 from github.Repository import Repository
 
@@ -18,30 +17,25 @@ class Update:
 
     def __init__(
         self,
+        conn_creds: dict[str, str],
         ghh: Github = Github(login_or_token=os.getenv("GH_AUTH_TOKEN")),
-        conn_creds: Union[dict[str, str], None] = None,
     ) -> None:
         self.ghh: Github = ghh
         self.conn_creds = conn_creds
-        # self.dbh: Union[Database, None] = None
 
     async def _set_dbh(self) -> None:
-        self.dbh: Database = await Database.get_database_handle()
-        if isinstance(self.conn_creds, dict):
-            self.dbh = await Database.get_database_handle(conn_creds=self.conn_creds)
+        self.dbh = cast(
+            Database, await Database.get_database_handle(conn_creds=self.conn_creds)
+        )
 
     async def _fetch_stars(self) -> AsyncGenerator[List[Repository], None]:
 
         await self._set_dbh()
 
-        user: github.NamedUser.NamedUser = (
-            await asyncio.get_running_loop().run_in_executor(
-                None, self.ghh.get_user  # get the owner of the auth token
-            )
+        user = await asyncio.get_running_loop().run_in_executor(
+            None, self.ghh.get_user  # get the owner of the auth token
         )
-        stars: github.PaginatedList.PaginatedList[
-            Repository
-        ] = await asyncio.get_running_loop().run_in_executor(None, user.get_starred)
+        stars = await asyncio.get_running_loop().run_in_executor(None, user.get_starred)
         pages: int = math.ceil(stars.totalCount / 30)  # GitHub pagination count
 
         for page in range(pages):

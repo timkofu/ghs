@@ -1,4 +1,6 @@
-from typing import Any, Union
+from typing import Any, cast
+
+from asyncpg.connection import Connection
 
 from ghs.model.infrastructure.database.database import Database
 
@@ -7,21 +9,19 @@ class Pager:
 
     __slots__ = ("dbh", "limit", "conn_creds")
 
-    def __init__(self, conn_creds: Union[dict[str, str], None] = None) -> None:
-        self.dbh: Database
+    def __init__(self, conn_creds: dict[str, str]) -> None:
+        self.dbh: Connection
         self.limit: int = 100
-        self.conn_creds: Union[dict[str, str], None] = conn_creds
+        self.conn_creds: dict[str, str] = {}
 
     async def _set_dbh(self) -> None:
-        self.dbh = await Database.get_database_handle()
-        if isinstance(self.conn_creds, dict):
-            self.dbh = await Database.get_database_handle(self.conn_creds)
+        self.dbh = cast(Connection, await Database.get_database_handle(self.conn_creds))
 
     async def page(self) -> Any:
 
         await self._set_dbh()
 
-        for row in await self.dbh.read(
+        for row in await self.dbh.read(  # type: ignore
             f"""
                 SELECT add_time, project.name, description, pro_lang.name as language, url,
                 initial_stars, current_stars, initial_fork_count, current_fork_count

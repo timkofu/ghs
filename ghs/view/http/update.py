@@ -1,4 +1,5 @@
 import os
+from typing import Union
 
 from starlette.requests import Request
 from starlette.endpoints import HTTPEndpoint
@@ -12,7 +13,7 @@ from ghs.model.application.update import Update
 class UpdateStars(HTTPEndpoint):
     async def get(self, request: Request) -> PlainTextResponse:
 
-        cron_auth_token: str = str(request.path_params.get("update_auth_token"))
+        cron_auth_token: Union[str, None] = request.path_params.get("update_auth_token")  # type: ignore
 
         if cron_auth_token and (cron_auth_token == os.getenv("UPDATE_AUTH_TOKEN")):
             return PlainTextResponse("1", background=BackgroundTask(Update().stars))
