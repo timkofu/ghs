@@ -2,10 +2,10 @@ import os
 import math
 import asyncio
 import logging
-from typing import List, AsyncGenerator, Set, Tuple, Union, cast
+from typing import List, AsyncGenerator, Set, Tuple, Union, cast, Any
 
 from github import Github
-from github.Repository import Repository
+
 
 from ghs.model.infrastructure.database.database import Database
 
@@ -28,7 +28,7 @@ class Update:
             Database, await Database.get_database_handle(conn_creds=self.conn_creds)
         )
 
-    async def _fetch_stars(self) -> AsyncGenerator[List[Repository], None]:
+    async def _fetch_stars(self) -> AsyncGenerator[List[Any], None]:
 
         await self._set_dbh()
 
