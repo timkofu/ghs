@@ -1,5 +1,6 @@
 """
 **Infrastructure Layer**
 
-Retrieves and stores data.
+Data exchange with the outside world.
+TX datastructure: dict
 """

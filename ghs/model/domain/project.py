@@ -8,12 +8,12 @@ class Project(BaseModel):
 
     """Project entity."""
 
-    id: StrictInt
     name: StrictStr
     description: StrictStr
     url: HttpUrl
-    initial_stars: StrictInt
-    current_stars: StrictInt
+    star_count: StrictInt
+    fork_count: StrictInt
     add_time: datetime
-    initial_fork_count: StrictInt
-    current_fork_count: StrictInt
+
+    class Config:
+        frozen = True
