@@ -1,12 +1,6 @@
-import os
 from typing import cast
 
 import pytest
-
-if os.getenv("CI"):
-    pytest.skip("No PostgreSQL on GH Actions CI/CD", allow_module_level=True)
-
-from asyncpg.connection import Connection
 
 from ghs.model.infrastructure.database.database import Database
 
