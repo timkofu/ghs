@@ -1,6 +1,6 @@
 from datetime import datetime
 
-from pydantic import BaseModel
+from pydantic import BaseModel, validator
 from pydantic import StrictInt, StrictStr, HttpUrl
 
 
@@ -17,3 +17,4 @@ class Project(BaseModel):
 
     class Config:
         frozen = True
+        extra = "forbid"

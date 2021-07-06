@@ -18,7 +18,7 @@ class GitHubAPI:
     ) -> None:
         self.ghh: Github = Github(login_or_token=os.getenv("GH_AUTH_TOKEN"))
 
-    async def fetch_stars(self) -> AsyncGenerator[Project, None]:
+    async def fetch_stars(self) -> AsyncGenerator[dict[str, str], None]:
         """Returns a sett of Project objects"""
 
         user = await asyncio.get_running_loop().run_in_executor(
@@ -33,12 +33,16 @@ class GitHubAPI:
                 None, stars.get_page, page
             ):
 
-                yield Project(
+                p = Project(
                     name=project.name.capitalize(),
                     description=str(project.description),  # Sometimes it's None
                     url=project.html_url,
-                    initial_stars=project.stargazers_count,
                     star_count=project.stargazers_count,
                     add_time=datetime.now(),
                     fork_count=project.forks_count,
-                )
+                ).dict()
+
+                # The URL is now validated, let's turn it into a string
+                p["url"] = str(p["url"])
+
+                yield p
