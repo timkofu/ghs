@@ -1,10 +1,11 @@
 from datetime import datetime
 
-from pydantic import BaseModel, validator
 from pydantic import StrictInt, StrictStr, HttpUrl
+from pydantic.dataclasses import dataclass
 
 
-class Project(BaseModel):
+@dataclass(frozen=True)
+class Project:
 
     """Project entity."""
 
@@ -14,7 +15,3 @@ class Project(BaseModel):
     star_count: StrictInt
     fork_count: StrictInt
     add_time: datetime
-
-    class Config:
-        frozen = True
-        extra = "forbid"

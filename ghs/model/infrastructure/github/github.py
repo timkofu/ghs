@@ -29,20 +29,22 @@ class GitHubAPI:
         pages: int = math.ceil(stars.totalCount / 30)  # GitHub pagination count
 
         for page in range(pages):
-            for project in await asyncio.get_event_loop().run_in_executor(
+            for p in await asyncio.get_event_loop().run_in_executor(
                 None, stars.get_page, page
             ):
 
-                p = Project(
-                    name=project.name.capitalize(),
-                    description=str(project.description),  # Sometimes it's None
-                    url=project.html_url,
-                    star_count=project.stargazers_count,
+                project = Project(
+                    name=p.name.capitalize(),
+                    description=str(p.description),  # Sometimes it's None
+                    url=p.html_url,
+                    star_count=p.stargazers_count,
                     add_time=datetime.now(),
-                    fork_count=project.forks_count,
-                ).dict()
+                    fork_count=p.forks_count,
+                )
 
-                # The URL is now validated, let's turn it into a string
-                p["url"] = str(p["url"])
+                # project = project.dict()
 
-                yield p
+                # # The URL is now validated, let's turn it into a string
+                # project["url"] = str(project["url"])
+
+                yield project
