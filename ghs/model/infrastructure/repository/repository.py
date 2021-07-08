@@ -11,7 +11,7 @@ from asyncpg import (
 from asyncpg.connection import Connection
 
 
-class Database:
+class Repository:
     """Database interface"""
 
     @classmethod
@@ -20,7 +20,11 @@ class Database:
         if conn_creds:
             dbh.db_handle = await connect(**conn_creds)
         else:
-            dbh.db_handle = await connect(os.getenv("DATABASE_URL"))
+            dbh.db_handle = await connect(
+                str(os.getenv("DATABASE_URL")).replace(
+                    "+asyncpg", ""
+                )  # Workaround as I move to SQLAlchemy
+            )
         return dbh
 
     __slots__ = ("db_handle",)

@@ -2,16 +2,16 @@ from typing import cast
 
 import pytest
 
-from ghs.model.infrastructure.database.database import Database
+from ghs.model.infrastructure.repository.repository import Repository
 
 pytestmark = pytest.mark.asyncio
 
 
 class TestDatabase:
-    async def get_dbh(self) -> Database:
+    async def get_dbh(self) -> Repository:
         return cast(
-            Database,
-            await Database.get_database_handle(
+            Repository,
+            await Repository.get_database_handle(
                 conn_creds=dict(user="testdb", password="testdb", database="testdb")
             ),
         )
