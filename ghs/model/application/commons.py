@@ -1,7 +1,7 @@
 import os
 
-from ghs.model.infrastructure.database.database import Database
+from ghs.model.infrastructure.repository.repository import Repository
 
 DEBUG = not os.getenv("PRODUCTION")
 
-DATABASE_HANDLE = Database()
+REPOSITORY_HANDLE = Repository()

@@ -2,7 +2,7 @@ from typing import Any, cast
 
 from asyncpg.connection import Connection
 
-from ghs.model.infrastructure.database.database import Database
+from ghs.model.infrastructure.repository.repository import Repository
 
 
 class Pager:
@@ -15,7 +15,9 @@ class Pager:
         self.conn_creds: dict[str, str] = {}
 
     async def _set_dbh(self) -> None:
-        self.dbh = cast(Connection, await Database.get_database_handle(self.conn_creds))
+        self.dbh = cast(
+            Connection, await Repository.get_database_handle(self.conn_creds)
+        )
 
     async def page(self) -> Any:
 
