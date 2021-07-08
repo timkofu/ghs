@@ -7,7 +7,7 @@ from typing import List, AsyncGenerator, Set, Tuple, Union, cast, Any
 from github import Github
 
 
-from ghs.model.infrastructure.database.database import Database
+from ghs.model.infrastructure.repository.repository import Repository
 
 
 class Update:
@@ -25,7 +25,7 @@ class Update:
 
     async def _set_dbh(self) -> None:
         self.dbh = cast(
-            Database, await Database.get_database_handle(conn_creds=self.conn_creds)
+            Repository, await Repository.get_database_handle(conn_creds=self.conn_creds)
         )
 
     async def _fetch_stars(self) -> AsyncGenerator[List[Any], None]:
