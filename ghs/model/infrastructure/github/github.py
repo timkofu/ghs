@@ -42,9 +42,10 @@ class GitHubAPI:
                     fork_count=p.forks_count,
                 )
 
-                # project = project.dict()
+                project = project.__dict__
+                del project["__initialised__"]  # Un-needed Pydantic artifact
 
-                # # The URL is now validated, let's turn it into a string
-                # project["url"] = str(project["url"])
+                # The URL is now validated, let's turn it into a string
+                project["url"] = str(project["url"])
 
                 yield project
