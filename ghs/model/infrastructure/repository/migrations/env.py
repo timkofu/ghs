@@ -8,24 +8,27 @@ from sqlalchemy.ext.asyncio import AsyncEngine
 
 from alembic import context
 
+from ghs.model.infrastructure.repository.model import Base
+
 # this is the Alembic Config object, which provides
 # access to the values within the .ini file in use.
-config = context.config
+config = context.config  # type: ignore
 
 # Interpret the config file for Python logging.
 # This line sets up loggers basically.
-fileConfig(config.config_file_name)
+fileConfig(config.config_file_name)  # type: ignore
 
 # add your model's MetaData object here
 # for 'autogenerate' support
 # from myapp import mymodel
 # target_metadata = mymodel.Base.metadata
-target_metadata = None
+target_metadata = Base.metadata  # type: ignore
 
 # other values from the config, defined by the needs of env.py,
 # can be acquired:
 # my_important_option = config.get_main_option("my_important_option")
 # ... etc.
+url = config.set_main_option("sqlalchemy.url", os.getenv("DATABASE_URL"))  # type: ignore
 
 
 def run_migrations_offline():
@@ -40,24 +43,24 @@ def run_migrations_offline():
     script output.
 
     """
-    # url = config.get_main_option("sqlalchemy.url")
-    url = os.getenv("DATABASE_URL")
-    context.configure(
+    url = config.get_main_option("sqlalchemy.url")  # type: ignore
+
+    context.configure(  # type: ignore
         url=url,
         target_metadata=target_metadata,
         literal_binds=True,
         dialect_opts={"paramstyle": "named"},
     )
 
-    with context.begin_transaction():
-        context.run_migrations()
+    with context.begin_transaction():  # type: ignore
+        context.run_migrations()  # type: ignore
 
 
-def do_run_migrations(connection):
-    context.configure(connection=connection, target_metadata=target_metadata)
+def do_run_migrations(connection):  # type: ignore
+    context.configure(connection=connection, target_metadata=target_metadata)  # type: ignore
 
-    with context.begin_transaction():
-        context.run_migrations()
+    with context.begin_transaction():  # type: ignore
+        context.run_migrations()  # type: ignore
 
 
 async def run_migrations_online():
@@ -68,19 +71,19 @@ async def run_migrations_online():
 
     """
     connectable = AsyncEngine(
-        engine_from_config(
-            config.get_section(config.config_ini_section),
+        engine_from_config(  # type: ignore
+            config.get_section(config.config_ini_section),  # type: ignore
             prefix="sqlalchemy.",
             poolclass=pool.NullPool,
             future=True,
         )
     )
 
-    async with connectable.connect() as connection:
-        await connection.run_sync(do_run_migrations)
+    async with connectable.connect() as connection:  # type: ignore
+        await connection.run_sync(do_run_migrations)  # type: ignore
 
 
-if context.is_offline_mode():
+if context.is_offline_mode():  # type: ignore
     run_migrations_offline()
 else:
     asyncio.run(run_migrations_online())
