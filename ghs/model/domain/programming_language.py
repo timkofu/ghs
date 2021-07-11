@@ -1,7 +1,9 @@
-from pydantic import StrictStr
-from pydantic.dataclasses import dataclass
+from pydantic import BaseModel, StrictStr
 
 
-@dataclass(frozen=True)
-class ProgrammingLanguage:
-    language: StrictStr
+class ProgrammingLanguage(BaseModel):
+    name: StrictStr
+
+    class Config:
+        frozen = True
+        extra = "forbid"

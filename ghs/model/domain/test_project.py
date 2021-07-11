@@ -16,9 +16,9 @@ class TestProject:
             name="name",
             description="this is a test project entity",
             url="http://local.host",
-            star_count=1,
-            add_time=datetime.now(),
-            fork_count=0,
+            stars=1,
+            forks=0,
+            added_on=datetime.utcnow(),
         )
 
     async def test_incorrect_data(self) -> None:
@@ -28,7 +28,7 @@ class TestProject:
                 name="name",
                 description="this is a test project entity",
                 url="localhost",
-                star_count=1,
-                add_time=datetime.now(),
-                fork_count=1,
+                stars=1,
+                forks=1,
+                added_on=datetime.utcnow(),
             )
