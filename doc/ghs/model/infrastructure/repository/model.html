@@ -34,6 +34,36 @@
 <section>
 <h2 class="section-title" id="header-classes">Classes</h2>
 <dl>
+<dt id="ghs.model.infrastructure.repository.model.ProgrammingLanguage"><code class="flex name class">
+<span>class <span class="ident">ProgrammingLanguage</span></span>
+<span>(</span><span>**kwargs)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>The base class of the class hierarchy.</p>
+<p>When called, it accepts no arguments and returns a new featureless
+instance that has no instance attributes and cannot be given any.</p>
+<p>A simple constructor that allows initialization from kwargs.</p>
+<p>Sets attributes on the constructed instance using the names and
+values in <code>kwargs</code>.</p>
+<p>Only keys that are present as
+attributes of the instance's class are allowed. These could be,
+for example, any mapped columns or relationships.</p></div>
+<h3>Ancestors</h3>
+<ul class="hlist">
+<li>sqlalchemy.orm.decl_api.Base</li>
+</ul>
+<h3>Instance variables</h3>
+<dl>
+<dt id="ghs.model.infrastructure.repository.model.ProgrammingLanguage.id"><code class="name">var <span class="ident">id</span></code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="ghs.model.infrastructure.repository.model.ProgrammingLanguage.name"><code class="name">var <span class="ident">name</span></code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+</dl>
+</dd>
 <dt id="ghs.model.infrastructure.repository.model.Project"><code class="flex name class">
 <span>class <span class="ident">Project</span></span>
 <span>(</span><span>**kwargs)</span>
@@ -54,7 +84,31 @@ for example, any mapped columns or relationships.</p></div>
 </ul>
 <h3>Instance variables</h3>
 <dl>
+<dt id="ghs.model.infrastructure.repository.model.Project.added_on"><code class="name">var <span class="ident">added_on</span></code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="ghs.model.infrastructure.repository.model.Project.description"><code class="name">var <span class="ident">description</span></code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="ghs.model.infrastructure.repository.model.Project.forks"><code class="name">var <span class="ident">forks</span></code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
 <dt id="ghs.model.infrastructure.repository.model.Project.id"><code class="name">var <span class="ident">id</span></code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="ghs.model.infrastructure.repository.model.Project.name"><code class="name">var <span class="ident">name</span></code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="ghs.model.infrastructure.repository.model.Project.stars"><code class="name">var <span class="ident">stars</span></code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="ghs.model.infrastructure.repository.model.Project.url"><code class="name">var <span class="ident">url</span></code></dt>
 <dd>
 <div class="desc"></div>
 </dd>
@@ -77,9 +131,22 @@ for example, any mapped columns or relationships.</p></div>
 <li><h3><a href="#header-classes">Classes</a></h3>
 <ul>
 <li>
-<h4><code><a title="ghs.model.infrastructure.repository.model.Project" href="#ghs.model.infrastructure.repository.model.Project">Project</a></code></h4>
+<h4><code><a title="ghs.model.infrastructure.repository.model.ProgrammingLanguage" href="#ghs.model.infrastructure.repository.model.ProgrammingLanguage">ProgrammingLanguage</a></code></h4>
 <ul class="">
+<li><code><a title="ghs.model.infrastructure.repository.model.ProgrammingLanguage.id" href="#ghs.model.infrastructure.repository.model.ProgrammingLanguage.id">id</a></code></li>
+<li><code><a title="ghs.model.infrastructure.repository.model.ProgrammingLanguage.name" href="#ghs.model.infrastructure.repository.model.ProgrammingLanguage.name">name</a></code></li>
+</ul>
+</li>
+<li>
+<h4><code><a title="ghs.model.infrastructure.repository.model.Project" href="#ghs.model.infrastructure.repository.model.Project">Project</a></code></h4>
+<ul class="two-column">
+<li><code><a title="ghs.model.infrastructure.repository.model.Project.added_on" href="#ghs.model.infrastructure.repository.model.Project.added_on">added_on</a></code></li>
+<li><code><a title="ghs.model.infrastructure.repository.model.Project.description" href="#ghs.model.infrastructure.repository.model.Project.description">description</a></code></li>
+<li><code><a title="ghs.model.infrastructure.repository.model.Project.forks" href="#ghs.model.infrastructure.repository.model.Project.forks">forks</a></code></li>
 <li><code><a title="ghs.model.infrastructure.repository.model.Project.id" href="#ghs.model.infrastructure.repository.model.Project.id">id</a></code></li>
+<li><code><a title="ghs.model.infrastructure.repository.model.Project.name" href="#ghs.model.infrastructure.repository.model.Project.name">name</a></code></li>
+<li><code><a title="ghs.model.infrastructure.repository.model.Project.stars" href="#ghs.model.infrastructure.repository.model.Project.stars">stars</a></code></li>
+<li><code><a title="ghs.model.infrastructure.repository.model.Project.url" href="#ghs.model.infrastructure.repository.model.Project.url">url</a></code></li>
 </ul>
 </li>
 </ul>
