@@ -40,10 +40,7 @@ class GitHubAPI:
                     star_count=p.stargazers_count,
                     add_time=datetime.now(),
                     fork_count=p.forks_count,
-                )
-
-                project = project.__dict__
-                del project["__initialised__"]  # Un-needed Pydantic artifact
+                ).dict()
 
                 # The URL is now validated, let's turn it into a string
                 project["url"] = str(project["url"])
