@@ -16,8 +16,11 @@ class TestProject:
             name="name",
             description="this is a test project entity",
             url="http://local.host",
-            stars=1,
-            forks=0,
+            initial_stars=1,
+            current_stars=2,
+            initial_forks=0,
+            current_forks=1,
+            programming_language="Python",
             added_on=datetime.utcnow(),
         )
 
