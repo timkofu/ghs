@@ -11,8 +11,11 @@ class Project(BaseModel):
     name: StrictStr
     description: StrictStr
     url: HttpUrl
-    stars: StrictInt
-    forks: StrictInt
+    initial_stars: StrictInt
+    current_stars: StrictInt
+    initial_forks: StrictInt
+    current_forks: StrictInt
+    programming_language: StrictStr
     added_on: datetime
 
     class Config:
