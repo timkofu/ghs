@@ -28,7 +28,7 @@ target_metadata = Base.metadata  # type: ignore
 # can be acquired:
 # my_important_option = config.get_main_option("my_important_option")
 # ... etc.
-url = config.set_main_option("sqlalchemy.url", os.getenv("DATABASE_URL"))  # type: ignore
+config.set_main_option("sqlalchemy.url", os.getenv("DATABASE_URL"))  # type: ignore
 
 
 def run_migrations_offline():
