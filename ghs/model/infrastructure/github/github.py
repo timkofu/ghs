@@ -37,9 +37,12 @@ class GitHubAPI:
                     name=p.name.capitalize(),
                     description=str(p.description),  # Sometimes it's None
                     url=p.html_url,
-                    star_count=p.stargazers_count,
-                    add_time=datetime.now(),
-                    fork_count=p.forks_count,
+                    initial_stars=p.stargazers_count,
+                    current_stars=p.stargazers_count,
+                    initial_forks=p.forks_count,
+                    current_forks=p.forks_count,
+                    programming_language=p.language,
+                    added_on=datetime.now(),
                 ).dict()
 
                 # The URL is now validated, let's turn it into a string
