@@ -6,7 +6,7 @@ from asyncache import cached
 from cachetools import TTLCache
 from asyncpg import (
     connect,
-)  # , Record  -- will need to be Any as the docs say "Record objects currently cannot be created from Python code."
+)
 
 from asyncpg.connection import Connection
 
