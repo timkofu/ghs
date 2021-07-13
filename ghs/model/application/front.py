@@ -2,7 +2,7 @@ from typing import Any, cast
 
 from asyncpg.connection import Connection
 
-from ghs.model.infrastructure.repository.repository import Repository
+from ghs.model.infrastructure.database.legacy_repo import Repository
 
 
 class Pager:

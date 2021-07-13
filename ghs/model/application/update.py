@@ -7,7 +7,7 @@ from typing import List, AsyncGenerator, Set, Tuple, Union, cast, Any
 from github import Github
 
 
-from ghs.model.infrastructure.repository.repository import Repository
+from ghs.model.infrastructure.database.legacy_repo import Repository
 
 
 class Update:
