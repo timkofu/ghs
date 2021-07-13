@@ -1,6 +1,6 @@
 import os
 
-from ghs.model.infrastructure.repository.repository import Repository
+from ghs.model.infrastructure.database.legacy_repo import Repository
 
 DEBUG = not os.getenv("PRODUCTION")
 

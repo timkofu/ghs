@@ -1,3 +1,5 @@
+from ghs.model.infrastructure.database.orm.model import ProgrammingLanguage
+
 from .base import Base
 
 

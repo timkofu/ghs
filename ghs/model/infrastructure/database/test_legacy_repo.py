@@ -2,7 +2,7 @@ from typing import cast
 
 import pytest
 
-from ghs.model.infrastructure.repository.repository import Repository
+from ghs.model.infrastructure.database.legacy_repo import Repository
 
 pytestmark = pytest.mark.asyncio
 
