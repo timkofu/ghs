@@ -45,8 +45,8 @@ class TestProject:
             )
 
     async def test_get_with_correct_params(self) -> None:
-        assert await self.proj.get({"name": "Python"})
+        assert [i async for i in self.proj.get({"name": "Python"})] == []
 
     async def test_get_with_incorrect_params(self) -> None:
         with pytest.raises(ValueError):  # type:ignore
-            assert await self.proj.get({"faith": "Christian"})
+            assert [i async for i in self.proj.get({"faith": "Christian"})]
