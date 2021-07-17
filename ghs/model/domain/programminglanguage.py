@@ -1,7 +1,7 @@
 from pydantic import BaseModel, StrictStr
 
 
-class ProgrammingLanguage(BaseModel):
+class Programminglanguage(BaseModel):
     name: StrictStr
 
     class Config:
