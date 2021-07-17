@@ -7,13 +7,13 @@ This will have no tests as it's pure SQLAlchemy, hich is itself tested.
 import datetime
 
 from sqlalchemy import Column, String, Integer, DateTime, ForeignKey  # type: ignore
-from sqlalchemy.orm import backref, declarative_base, relationship  # type: ignore
+from sqlalchemy.orm import declarative_base, relationship  # type: ignore
 
 
 Base = declarative_base()  # type: ignore
 
 
-class ProgrammingLanguage(Base):  # type: ignore
+class Programminglanguage(Base):  # type: ignore
 
     __tablename__ = "programming_language"
 
@@ -40,4 +40,4 @@ class Project(Base):  # type: ignore
         Integer, ForeignKey("programming_language.id")
     )  # type:ignore
     added_on = Column(DateTime, default=datetime.datetime.utcnow)  # type: ignore
-    programming_language = relationship("ProgrammingLanguage", back_populates="projects")  # type: ignore
+    programming_language = relationship("Programminglanguage", back_populates="projects")  # type: ignore
