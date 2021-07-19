@@ -31,7 +31,7 @@ class TestRepository:
         )
 
     async def test_project_add_with_incorrect_params(self) -> None:
-        with pytest.raises(ValidationError):  # type: ignore
+        with pytest.raises((ValidationError, ValueError)):  # type: ignore
             assert await self.repo.add(
                 object_details={
                     "name": "name",
@@ -61,9 +61,9 @@ class TestRepository:
         )
 
     async def test_programming_language_project_add_with_incorrect_params(self) -> None:
-        with pytest.raises(ValidationError):  # type: ignore
+        with pytest.raises((ValidationError, ValueError)):  # type: ignore
             assert await self.repo.add(
-                object_details={"panet": "Earth"},
+                object_details={"planet": "Earth"},
             )
 
     async def test_programming_language_project_get_with_correct_params(self) -> None:

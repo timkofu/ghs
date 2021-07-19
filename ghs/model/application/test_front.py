@@ -1,9 +1,6 @@
-import os
+from typing import Any, cast
 
 import pytest
-
-if os.getenv("CI"):
-    pytest.skip("No PostgreSQL on GH Actions CI/CD", allow_module_level=True)
 
 
 from ghs.model.application.front import Pager
@@ -11,9 +8,16 @@ from ghs.model.application.front import Pager
 pytestmark = pytest.mark.asyncio
 
 
+class _FakeRepository:
+    async def page(self) -> dict[str, Any]:
+        return {"some": "thing"}
+
+
 class TestFront:
     async def test_front(self) -> None:
 
-        assert Pager(
-            conn_creds=dict(user="testdb", password="testdb", database="testdb")
-        )
+        p = Pager()
+        # duck_typing ;)
+        p.repository = _FakeRepository()  # type:ignore
+
+        assert Pager()

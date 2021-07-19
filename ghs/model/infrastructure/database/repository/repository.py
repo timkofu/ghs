@@ -5,6 +5,8 @@ from typing import Any, AsyncGenerator
 from sqlalchemy.pool import NullPool
 from sqlalchemy.future import select
 from sqlalchemy.orm import sessionmaker
+
+# from sqlalchemy.dialects.postgresql import insert
 from sqlalchemy.ext.asyncio import create_async_engine, AsyncSession
 
 
@@ -47,26 +49,35 @@ class Repository:
         self,
         object_details: dict[str, Any],
     ) -> dict[str, str]:
-        domain_object = (await self._get_orm_and_domain_objects())[1]  # type: ignore
-        return domain_object(**object_details).dict()  # type:ignore
+
+        orm_object, domain_object = await self._get_orm_and_domain_objects()  # type: ignore
+        # Validate details
+        try:
+            domain_object(**object_details).dict()  # type:ignore
+        except Exception as e:
+            raise ValueError(f"Invalid object details: {str(e)}")
+
+        return {"its": "true"}
 
     async def get(  # type:ignore
         self, filter: dict[str, Any]
     ) -> AsyncGenerator[dict[str, Any], None]:
 
         orm_object, domain_object = await self._get_orm_and_domain_objects()  # type: ignore
-        project_fields = domain_object.schema()["required"]  # type: ignore
-        if not all(k in project_fields for k in filter.keys()):
-            raise ValueError("Invalid domain object key:value pair(s).")
 
         async with self.session() as session:  # type: ignore
             async with session.begin():  # type: ignore
 
                 query = select(orm_object)  # type:ignore
-                for column, value in filter.items():
-                    query = query.filter(  # type:ignore
-                        getattr(orm_object, column).like(f"%{value}%")
-                    )  # type:ignore
+
+                if filter:  # If filter is not empty
+                    project_fields = domain_object.schema()["required"]  # type: ignore
+                    if not all(k in project_fields for k in filter.keys()):
+                        raise ValueError("Invalid domain object key:value pair(s).")
+                    for column, value in filter.items():
+                        query = query.filter(  # type:ignore
+                            getattr(orm_object, column).like(f"%{value}%")
+                        )  # type:ignore
 
                 result = await session.execute(query)  # type: ignore
 
