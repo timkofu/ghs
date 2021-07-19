@@ -1,6 +1,15 @@
-from datetime import datetime
+import os
 
 import pytest
+
+# I need this to connect to a real db on dev, so I won't use fake objects here
+# which needs disabling on CI
+if os.getenv("CI"):
+    pytest.skip("No PostgreSQL on GH Actions CI/CD", allow_module_level=True)
+
+
+from datetime import datetime
+
 from pydantic.error_wrappers import ValidationError
 
 from ghs.model.infrastructure.database.repository.repository import Repository
