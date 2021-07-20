@@ -1,23 +1,24 @@
-from typing import Any, cast
+from typing import Any, AsyncGenerator
 
 import pytest
 
 
-from ghs.model.application.front import Pager
+from ghs.model.application.front import Front
 
 pytestmark = pytest.mark.asyncio
 
 
 class _FakeRepository:
-    async def page(self) -> dict[str, Any]:
-        return {"some": "thing"}
+    async def get(self, filter: dict[str, Any]) -> AsyncGenerator[dict[str, Any], None]:
+        yield {"some": "thing"}
 
 
 class TestFront:
     async def test_front(self) -> None:
 
-        p = Pager()
+        f = Front()
         # duck_typing ;)
-        p.repository = _FakeRepository()  # type:ignore
+        f.repository = _FakeRepository()  # type:ignore
 
-        assert Pager()
+        async for p in f.page():
+            assert isinstance(p, dict)

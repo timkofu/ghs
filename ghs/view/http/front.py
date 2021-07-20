@@ -3,7 +3,7 @@ from typing import Any, cast
 from starlette.requests import Request
 from starlette.endpoints import HTTPEndpoint
 
-from ghs.model.application.front import Pager
+from ghs.model.application.front import Front
 
 from .templates.loader import templates_handle
 
@@ -11,7 +11,7 @@ from .templates.loader import templates_handle
 class Front(HTTPEndpoint):
     async def get(self, request: Request) -> object:
 
-        pager = Pager({})
+        pager = Front({})
 
         rows: Any = [r async for r in cast(Any, pager.page())]
 

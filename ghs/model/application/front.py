@@ -1,9 +1,9 @@
-from typing import Any
+from typing import Any, AsyncGenerator
 
 from ghs.model.infrastructure.database.repository.repository import Repository
 
 
-class Pager:
+class Front:
 
     __slots__ = ("limit", "repository")
 
@@ -11,7 +11,7 @@ class Pager:
         self.limit: int = 100
         self.repository: Repository = Repository()
 
-    async def page(self) -> dict[str, Any]:
+    async def page(self) -> AsyncGenerator[dict[str, Any], None]:
 
         async for row in self.repository.get({}):
             yield row
