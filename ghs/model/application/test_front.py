@@ -16,9 +16,8 @@ class _FakeRepository:
 class TestFront:
     async def test_front(self) -> None:
 
-        f = Front()
         # duck_typing ;)
-        f.repository = _FakeRepository()  # type:ignore
+        f = Front(_FakeRepository())  # type:ignore
 
         async for p in f.page():
             assert isinstance(p, dict)
