@@ -1,5 +1,5 @@
 
-FROM python:3.9.5-slim-buster
+FROM python:3.9.6-slim-buster
 
 LABEL name="@timkofu"
 
@@ -10,7 +10,6 @@ WORKDIR /app
 ENV PYTHONDONTWRITEBYTECODE 1
 ENV PYTHONUNBUFFERED 1
 ENV PRODUCTION 1
-ENV NEW_RELIC_CONFIG_FILE=newrelic.ini 
 
 # copy project
 COPY . .
@@ -24,4 +23,4 @@ RUN useradd -ms /bin/bash ghs
 USER ghs
 
 # run uvicorn
-CMD newrelic-admin run-program uvicorn ghs.view.web.endpoints:app --host 0.0.0.0 --port $PORT  --loop uvloop --http httptools --interface asgi3 --log-level info
+CMD uvicorn ghs.view.web.endpoints:app --host 0.0.0.0 --port $PORT  --loop uvloop --http httptools --interface asgi3 --log-level info
