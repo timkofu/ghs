@@ -6,7 +6,7 @@ from sqlalchemy.pool import NullPool
 from sqlalchemy.future import select
 from sqlalchemy.orm import sessionmaker
 
-from sqlalchemy.dialects.postgresql import insert
+# from sqlalchemy.dialects.postgresql import insert
 from sqlalchemy.ext.asyncio import create_async_engine, AsyncSession
 
 

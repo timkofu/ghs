@@ -2,9 +2,9 @@ name: GHS
 
 on:
   push:
-    branches: [2.0]
+    branches: [3.0]
   pull_request:
-    branches: [2.0]
+    branches: [3.0]
 
 jobs:
   build:
