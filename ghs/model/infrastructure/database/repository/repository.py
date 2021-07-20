@@ -6,7 +6,7 @@ from sqlalchemy.pool import NullPool
 from sqlalchemy.future import select
 from sqlalchemy.orm import sessionmaker
 
-# from sqlalchemy.dialects.postgresql import insert
+from sqlalchemy.dialects.postgresql import insert
 from sqlalchemy.ext.asyncio import create_async_engine, AsyncSession
 
 
@@ -56,6 +56,14 @@ class Repository:
             domain_object(**object_details).dict()  # type:ignore
         except Exception as e:
             raise ValueError(f"Invalid object details: {str(e)}")
+
+        # INSERT is always UPSERT
+        # query = (
+        #     insert(orm_object)
+        #     .values(**object_details)
+        #     .on_conflict_do_update(index_elements=["name"], set_=object_details)
+        #     .returning(orm_object.c.id)
+        # )
 
         return {"its": "true"}
 
