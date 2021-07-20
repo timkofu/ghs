@@ -40,9 +40,7 @@ class _FakeRepository:
 class TestUpdate:
     async def test_fetch_stars(self) -> None:
 
-        fetch = Update()
         # duck_typing :)
-        fetch.ghh = _FakeGitHub()  # type:ignore
-        fetch.repository = _FakeRepository()  # type:ignore
+        fetch = Update(repository_class=_FakeRepository, githubapi_class=_FakeGitHub)
 
         assert await fetch.stars() is None

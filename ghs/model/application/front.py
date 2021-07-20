@@ -7,7 +7,7 @@ class Front:
 
     __slots__ = ("limit", "repository")
 
-    def __init__(self, repository_class: Any) -> None:
+    def __init__(self, repository_class: Any = Repository) -> None:
         self.limit: int = 100
         self.repository: Repository = repository_class()
 

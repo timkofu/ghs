@@ -1,4 +1,5 @@
 import logging
+from typing import Any
 
 from ghs.model.infrastructure.github.github import GitHubAPI
 from ghs.model.infrastructure.database.repository.repository import Repository
@@ -11,9 +12,11 @@ class Update:
 
     def __init__(
         self,
+        repository_class: Any = Repository,
+        githubapi_class: Any = GitHubAPI,
     ) -> None:
-        self.ghh: GitHubAPI = GitHubAPI()
-        self.repository: Repository = Repository()
+        self.ghh: GitHubAPI = githubapi_class()
+        self.repository: Repository = repository_class()
 
     async def stars(self) -> None:
 
