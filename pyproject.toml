@@ -7,7 +7,7 @@ license = "AGPLv3"
 
 [tool.poetry.dependencies]
 python = "^3.9"
-uvicorn = "^0.14.0"
+uvicorn = "^0.15.0"
 starlette = "^0.16.0"
 asyncpg = "^0.23.0"
 httptools = "^0.2.0"
