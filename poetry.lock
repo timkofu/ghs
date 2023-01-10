@@ -1515,14 +1515,14 @@ test = ["argcomplete (>=2.0)", "pre-commit", "pytest", "pytest-mock"]
 
 [[package]]
 name = "types-cachetools"
-version = "0.1.10"
+version = "5.2.1"
 description = "Typing stubs for cachetools"
 category = "main"
 optional = false
 python-versions = "*"
 files = [
-    {file = "types-cachetools-0.1.10.tar.gz", hash = "sha256:f2727cf379989ba4d081f9ed11ec28c6730adbd120dc0deb2036c5ef69e515e0"},
-    {file = "types_cachetools-0.1.10-py3-none-any.whl", hash = "sha256:76d312d6e55fe19f7a2ea9a3271945e6f5c56f4fd76cc3cb2366109785f3462b"},
+    {file = "types-cachetools-5.2.1.tar.gz", hash = "sha256:069cfc825697cd51445c1feabbe4edc1fae2b2315870e7a9a179a7c4a5851bee"},
+    {file = "types_cachetools-5.2.1-py3-none-any.whl", hash = "sha256:b496b7e364ba050c4eaadcc6582f2c9fbb04f8ee7141eb3b311a8589dbd4506a"},
 ]
 
 [[package]]
@@ -1754,4 +1754,4 @@ testing = ["flake8 (<5)", "func-timeout", "jaraco.functools", "jaraco.itertools"
 [metadata]
 lock-version = "2.0"
 python-versions = "^3.9"
-content-hash = "05459dfb76386ca628e8fac0ccbec24c8f283b1e27a10387fb829ceddc31abd9"
+content-hash = "a4b443d2db0f42fb77b96c3fa6d70b1e2128837721bd6a613a2557f606626d79"
