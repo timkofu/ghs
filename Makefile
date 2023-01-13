@@ -6,6 +6,6 @@ dev_server:
 
 .PHONY: doc
 doc:
-	@poetry run pdoc --force --html --output-dir doc --config show_source_code=False ghs > /dev/null
+	@pdoc --force --html --output-dir doc --config show_source_code=False ghs > /dev/null
 
 deploy: test doc
